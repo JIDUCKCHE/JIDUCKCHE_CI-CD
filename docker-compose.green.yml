@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  jiduckche:
+     image: jiduckche:1.0
+     volumes:
+          - /home/ubuntu/deploy/JIDUCKCHE_CI-CD:/deploy/JIDUCKCHE_CI-CD
+     ports:
+          - "5002:5000"
