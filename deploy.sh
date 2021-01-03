@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-cp -rf /home/ubuntu/live.js ./server/config/
-cp -rf /home/ubuntu/dev.js ./server/config/
+cp -rf /home/ubuntu/live.js /home/ubuntu/deploy/JIDUCKCHE_CI-CD/server/config/
+cp -rf /home/ubuntu/dev.js /home/ubuntu/deploy/JIDUCKCHE_CI-CD/server/config/
 
 DOCKER_APP_NAME=jiduckche
 
