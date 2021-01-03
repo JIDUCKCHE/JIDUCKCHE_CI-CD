@@ -1,5 +1,4 @@
 dev.js
 node_modules/
-build/
 .env.development
 package-lock.json

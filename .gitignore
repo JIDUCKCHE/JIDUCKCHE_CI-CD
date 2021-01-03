@@ -2,6 +2,5 @@ dev.js
 live.js
 node_modules/
 uploads/
-build/
 logs/
 package-lock.json
