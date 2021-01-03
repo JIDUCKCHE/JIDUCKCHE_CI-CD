@@ -2,7 +2,7 @@ version: '2'
 
 services:
   jiduckche:
-     image: jiduckche:latest
+     image: jiduckche:1.0
      volumes:
           - /home/ubuntu/deploy/JIDUCKCHE_CD-CI
      ports:
