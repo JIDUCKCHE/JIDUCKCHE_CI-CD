@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
 
   User.findByToken(token, (err, user) => {
     if (err || !user) {
-      res.json({
+      return res.json({
         isAuth: false,
         error: true
       });
