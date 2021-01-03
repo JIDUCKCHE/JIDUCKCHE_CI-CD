@@ -55,7 +55,7 @@ function Comment(props) {
 
             {/* Root Comment Form */}
 
-            {user &&
+            {user && user.userData.isAuth &&
             <form style={{ display: 'flex' }} onSubmit={onSubmit} >
                 <textarea
                     style={{ width: '80%', borderRadius: '5px', margin: 'auto' }}
