@@ -2,7 +2,7 @@ FROM node:12.18
 
 MAINTAINER RyunYeongKim <jiduckche.com@gmail.com>
 
-VOLUME /deploy/JIDUCKCHE_CI-CD
+VOLUME /ubuntu/deploy/JIDUCKCHE_CI-CD
 
 COPY ./start.sh /usr/local/bin
 
