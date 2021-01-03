@@ -3,4 +3,5 @@
 cd /deploy/JIDUCKCHE_CI-CD
 
 npm install
-npm run backend
+npm install -g pm2
+npm pm2 start ./server/index.js
