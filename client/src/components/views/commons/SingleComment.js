@@ -93,10 +93,10 @@ function SingleComment(props) {
         ,<span onClick={onClickDelete} key="comment-delete" style={{margin: '0 0 0 10px'}}>delete</span>
     ]
 
-    const actions_general = [
+    const actions_general = user ?[
         <Like prodId={props.prodId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
         ,<span onClick={onClickReplyOpen} key="comment-basic-reply-to" style={{margin: '0 0 0 10px'}}>Reply to</span>
-    ]
+    ]:[<Like prodId={props.prodId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>]
 
     return (
         <div>

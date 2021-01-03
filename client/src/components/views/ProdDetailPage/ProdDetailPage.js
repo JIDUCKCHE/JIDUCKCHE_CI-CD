@@ -136,11 +136,11 @@ function ProdDetailPage(props) {
             </div>
             </>
             }
-            {User &&
+            {/* {User && */}
             <div style={{ width: '100%', padding: '3rem 4rem' }}>
                 <Comment refreshFunction={refreshFunction} commentLists={Comments} prodId={prodId} number={Comments.length}/>
             </div>
-            }
+            {/* } */}
         </div>
     )
 }
