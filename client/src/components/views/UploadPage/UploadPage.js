@@ -136,7 +136,11 @@ function UploadPage(props) {
         }
 
         const onStartDateChange = (date) => {
-            setStartDate(date)
+            if(date > EndDate) {
+                alert("펀딩 시작일은 종료일 이후일 수 없습니다.")
+            } else {
+                setStartDate(date)
+            }
         }
 
         const onEndDateChange = (date) => {
