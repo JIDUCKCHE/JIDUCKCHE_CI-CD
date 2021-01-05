@@ -22,6 +22,7 @@ import NoticePage from './views/NoticePage/NoticePage'
 import NoticeDetailPage from './views/NoticeDetailPage/NoticeDetailPage'
 import UploadNoticePage from './views/UploadNoticePage/UploadNoticePage';
 import Footer from "./views/Footer/Footer";
+import NoticeModifyPage from './views/NoticeModifyPage/NoticeModifyPage';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/ranking" component={Auth(RankingPage, null, false)} />
           <Route exact path="/policy" component={Auth(PolicyPage, null, false)} />
           <Route exact path="/notice" component={Auth(NoticePage, null, false)} />
+          <Route exact path="/notice/modify/:noticeId" component={Auth(NoticeModifyPage, true, true)} />
           <Route exact path="/notice/:noticeId" component={Auth(NoticeDetailPage, null, false)} />
           <Route exact path="/uploadNotice" component={Auth(UploadNoticePage, true, true)} />
         </Switch>

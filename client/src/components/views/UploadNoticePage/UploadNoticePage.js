@@ -67,7 +67,7 @@ function UploadNoticePage(props) {
                 <br />
                 
                 <label>내용</label>
-                <TextArea
+                <TextArea wrap="hard" col="50"
                     onChange={onContentChange}
                     value={Content}
                 />

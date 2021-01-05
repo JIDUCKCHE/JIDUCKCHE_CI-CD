@@ -9,7 +9,7 @@ function NoticeGrid(props) {
                         <text>{props.index}</text>
                     </div>
                     <a href={`/notice/${props.notice._id}`}>
-                        <div style={{ width: '70% ', textAlign: 'left'}}>
+                        <div style={{ width: '100% ', textAlign: 'left'}}>
                             <text>{props.notice.title}</text>
                         </div>
                     </a>

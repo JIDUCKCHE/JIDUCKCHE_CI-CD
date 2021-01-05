@@ -15,10 +15,10 @@ router.get('/info/:id', (req, res) => { responseHandler(noticeLib.readNoticeInfo
 
 router.get('/main', (req, res) => { responseHandler(noticeLib.readMainNotice(), res) })
 
-// //Upadte
-// router.put('/', (req, res) => { responseHandler(prodLib.updateProd(req.body.prodId, req.body), res) })
+//Upadte
+router.put('/:id', (req, res) => { responseHandler(noticeLib.updateNotice(req.params.id, req.body), res) })
 
-// //Delete
-// router.delete('/', (req, res) => { responseHandler(prodLib.deleteProd(req.query.prodId, req.query.originName, req.query.preName), res) })
+//Delete
+router.delete('/:id', (req, res) => { responseHandler(noticeLib.deleteNotice(req.params.id), res) })
 
 module.exports = router;

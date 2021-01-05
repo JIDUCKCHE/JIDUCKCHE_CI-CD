@@ -5,7 +5,8 @@ const update_dao = require('../models/dao/update_dao');
 const moment = require('moment')
 
 const { Notice } = require('../models/Notice');
-const { User } = require('../models/User')
+const { Comment } = require('../models/Comment');
+const { User } = require('../models/User');
 
 //Create
 async function createNotice(save) {
@@ -47,32 +48,30 @@ async function readMainNotice() {
     return await read_dao.population(result, User, "userId")
 }
 
-// //Update
-// async function updateProd(prodId, update) {
-//     const variable = { _id: prodId }
-//     return await update_dao.findAndUpate(variable, update, Prod)
-// }
+//Update
+async function updateNotice(noticeId, update) {
+    const variable = { _id: noticeId }
+    return await update_dao.findAndUpate(variable, update, Notice)
+}
 
 
-// //Delete
-// async function deleteProd(prodId, originName, preName) {
-//     const variable = { _id: prodId }
-//     console.log(variable)
-//     try {
-//         return await Promise.all([
-//             fileLibrary.moveToTrash(originName, "prod", (err) => { throw (err) }),
-//             fileLibrary.moveToTrash(preName, "pre", (err) => { throw (err) }),
-//             delete_dao.findOneAndDelete(variable, Prod),
-//             delete_dao.findAndDelete({ prodId: prodId }, Like),
-//             delete_dao.findAndDelete({ prodId: prodId }, Comment)
-//     ])} catch (error) {
-//         throw error
-//     }
-// }
+//Delete
+async function deleteNotice(noticeId) {
+    const variable = { _id: noticeId }
+    try {
+        return await Promise.all([
+            delete_dao.findOneAndDelete(variable, Notice),
+            delete_dao.findAndDelete({ noticeId: noticeId }, Comment)
+    ])} catch (error) {
+        throw error
+    }
+}
 
 module.exports = {
     createNotice,
     readNotices,
     readNoticeInfo,
-    readMainNotice
+    readMainNotice,
+    updateNotice,
+    deleteNotice
 }
