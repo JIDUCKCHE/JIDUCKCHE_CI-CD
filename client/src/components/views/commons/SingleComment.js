@@ -12,6 +12,7 @@ function SingleComment(props) {
 
     const user = useSelector(state => state.user)
     const userId = localStorage.getItem('userId')
+    console.log(props.comment.userId)
 
     const [OpenReply, setOpenReply] = useState(false)
     const [OpenModify, setOpenModify] = useState(false)
@@ -101,7 +102,7 @@ function SingleComment(props) {
     return (
         <div>
             <Comment
-                actions={props.comment.userId._id === userId && props.comment.deleted === false ? actions_owner : actions_general}
+                actions={(props.comment.userId._id === userId || user.userData.isAdmin) && props.comment.deleted === false ? actions_owner : actions_general}
                 author={props.comment.userId.name}
                 avatar={<Avatar src={props.comment.userId.image} alt />}
                 content={props.comment.deleted === true ? <p> (삭제된 댓글입니다.) </p>:<p> {props.comment.content} {props.comment.modified ? '(수정됨)':'' }</p>}

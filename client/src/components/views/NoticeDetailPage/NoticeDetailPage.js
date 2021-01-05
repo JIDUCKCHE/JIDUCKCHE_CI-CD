@@ -22,10 +22,10 @@ function NoticeDetailPage(props) {
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div style={{ display: 'inline-block', marginTop: '2rem', textAlign: 'center'}}>
                 <h1>공지사항</h1>
-                <div style={{ backgroundColor: 'gray', height: '1000px'}}>
-                    <h2 style={{ color: 'white'}}>제목 : {Notice.title} </h2>
-                    <div style={{ marginTop: '2rem' }}>
-                        <text style={{ color: 'white' }}>{Notice.content}</text>
+                <div style={{ backgroundColor: 'gray', height: '1000px', display: 'flex', justifyContent: 'start', flexDirection: 'column', alignItems:'center' }}>
+                    <text style={{ fontSize: '40px', fontWeight: '1000', color: 'white', marginTop: '1rem' }}> {Notice.title} </text>
+                    <div style={{ marginTop: '2rem', width: '70%' }}>
+                        <text style={{ whiteSpace: 'pre-line', color: 'white', fontSize: '18px', fontWeight: '500' }}>{Notice.content}</text>
                     </div>
                 </div>
             </div>
