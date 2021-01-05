@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { Input, Button } from 'antd'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
 import SingleComment from './SingleComment'
 import ReplyComment from './ReplyComment'
+
+const { TextArea } = Input;
+
 
 function Comment(props) {
 
@@ -57,14 +61,14 @@ function Comment(props) {
 
             {user && user.userData.isAuth &&
             <form style={{ display: 'flex' }} onSubmit={onSubmit} >
-                <textarea
+                <TextArea  wrap="hard" col="50"
                     style={{ width: '80%', borderRadius: '5px', margin: 'auto' }}
                     onChange={handleClick}
                     value={commentValue}
                     placeholder="코멘트를 작성해 주세요"
                 />
                 <br />
-                <button style={{ width: '5%', height: '50px', margin: 'auto' }} onClick={onSubmit} > Submit</button>
+                <Button style={{ width: '5%', height: '50px', margin: 'auto' }} onClick={onSubmit} > Submit</Button>
             </form>
             }
         </div>

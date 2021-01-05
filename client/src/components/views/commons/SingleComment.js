@@ -16,15 +16,22 @@ function SingleComment(props) {
 
     const [OpenReply, setOpenReply] = useState(false)
     const [OpenModify, setOpenModify] = useState(false)
+    const [ReplyCommentValue, setReplyCommentValue] = useState("")
     const [CommentValue, setCommentValue] = useState("")
 
     const onClickReplyOpen = () => {
         setOpenReply(!OpenReply)
+        if (OpenModify) {
+            setOpenModify(!OpenModify)
+        }
     }
 
     const onClickModify = () => {
         setCommentValue(props.comment.content)
         setOpenModify(!OpenModify)
+        if (OpenReply) {
+            setOpenReply(!OpenReply)
+        }
     }
     
     const onClickDelete = () => {
@@ -43,12 +50,16 @@ function SingleComment(props) {
         setCommentValue(e.currentTarget.value)
     }
 
+    const onHandleReplyChange = (e) => {
+        setReplyCommentValue(e.currentTarget.value)
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if(CommentValue !== "") {
+        if(ReplyCommentValue !== "") {
             const variables = {
-                content: CommentValue,
+                content: ReplyCommentValue,
                 userId: user.userData._id,
                 prodId: props.prodId,
                 responseTo: props.comment._id
@@ -57,7 +68,7 @@ function SingleComment(props) {
                 .then(response => {
                     if(response.data.success) {
                         props.refreshFunction()
-                        setCommentValue("")
+                        setReplyCommentValue("")
                         setOpenReply(false)
                     } else {
                         alert('댓글을 저장하지 못했습니다.')
@@ -109,26 +120,26 @@ function SingleComment(props) {
             />
             {OpenReply &&
                 <form style={{ display: 'flex' }} onSubmit={onSubmit} >
-                    <textarea
+                    <TextArea wrap="hard" col="50"
                         style={{ width: '100%', borderRadius: '5px' }}
-                        onChange={onHandleChange}
-                        value={CommentValue}
+                        onChange={onHandleReplyChange}
+                        value={ReplyCommentValue}
                         placeholder="코멘트를 작성해 주세요"
                     />
                     <br />
-                    <button style={{ width: '20%', height: '52px' }} onClick={onSubmit} > Submit</button>
+                    <Button style={{ width: '5%', height: '50px', margin: 'auto' }} onClick={onSubmit} > Submit</Button>
                 </form>
             }
             {OpenModify &&
                 <form style={{ display: 'flex' }} onSubmit={onModifySubmit} >
-                    <textarea
+                    <TextArea wrap="hard" col="50"
                         style={{ width: '100%', borderRadius: '5px' }}
                         onChange={onHandleChange}
                         value={CommentValue}
                         placeholder="코멘트를 작성해 주세요"
                     />
                     <br />
-                    <button style={{ width: '20%', height: '52px' }} onClick={onModifySubmit} > Submit</button>
+                    <Button style={{ width: '5%', height: '50px', margin: 'auto' }} onClick={onModifySubmit} > Submit</Button>
                 </form>
             }
         </div>
