@@ -1,6 +1,10 @@
 const create_dao = require('../models/dao/create_dao');
 const read_dao = require('../models/dao/read_dao');
 const update_dao = require('../models/dao/update_dao');
+const ejs = require('ejs')
+const config = require('../config/key')
+const path = require('path');
+var appDir = path.dirname(require.main.filename);
 
 const { User } = require('../models/User');
 
@@ -8,9 +12,51 @@ async function createUser(save) {
     return await create_dao.saveObject(save, User)
 }
 
+async function createAuthCode(userId) {
+    const variable = { _id: userId }
+    try {
+        const user = await read_dao.findOne(variable, User)
+        const authNum = Math.random().toString().substr(2,6);
+        let emailTemplete;
+        ejs.renderFile(appDir+'/template/authMail.ejs', {authCode : authNum}, function (err, data) {
+        if(err) throw err
+        emailTemplete = data;
+        });
+        const transporter = config.transporter
+        await transporter.sendMail({
+            from: `지덕체 어드민`,
+            to: user.email,
+            subject: '회원가입을 위한 인증번호를 입력해주세요.',
+            html: emailTemplete,
+        });
+        transporter.close()
+        const update = { authCode: authNum }
+        await update_dao.findAndUpate(variable, update, User)
+    } catch (error) {
+        throw error
+    }
+}
+
 async function readUserInfo(userId) {
     const variable = { _id: userId }
     return await read_dao.findOne(variable, User)
+}
+
+async function emailAuth(userId, authCode) {
+    const variable = { _id: userId }
+
+    try {
+        user = await read_dao.findOne(variable, User)
+        if (user.authCode == authCode) {
+            const update = { level: 2 }
+            await update_dao.findAndUpate(variable, update, User)
+            return { auth: true }
+        } else {
+            return { auth: false }
+        }
+    } catch (error) {
+        throw error
+    }
 }
 
 async function setAdmin(userId) {
@@ -42,7 +88,9 @@ async function doLogout(userId) {
 
 module.exports = {
     createUser,
+    createAuthCode,
     readUserInfo,
+    emailAuth,
     setAdmin,
     doLogin,
     doLogout

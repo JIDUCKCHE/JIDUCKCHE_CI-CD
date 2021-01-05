@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { message } from 'antd';
 import { auth } from '../_actions/user_action'
 
-export default function (SpecificComponent, option, adminRoute) {
+export default function (SpecificComponent, option, adminRoute, allowLevel) {
     //null => 아무나 출입 가능
     //true => 로그인한 유저만 출입 가능
     //false => 로그인한 유저는 출입 불가능
@@ -26,10 +26,19 @@ export default function (SpecificComponent, option, adminRoute) {
                     }
                 } else {
                     //로그인 한 상태
-                    if(adminRoute && !response.payload.isAdmin) {
-                        message.warn('관리자만 접근 가능한 페이지 입니다.')
+                    if(response.payload.level == 1) {
+                        message.warn('이메일 인증을 진행해주세요.')
+                        props.history.push('/authEmail')
+                    }
+                    if (allowLevel && response.payload.level !== allowLevel) {
+                        message.error('잘못된 접근입니다.')
                         props.history.push('/')
-                    } else if (option === false && option !== null) {
+                    }
+                    if(adminRoute && !response.payload.isAdmin) {
+                            message.warn('관리자만 접근 가능한 페이지 입니다.')
+                            props.history.push('/')
+                    }
+                    if (option === false && option !== null) {
                         message.warn('로그인 한 유저는 접근 불가능한 페이지 입니다.')
                         props.history.push('/')
                     } 

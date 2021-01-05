@@ -7,6 +7,8 @@ const { auth } = require("../middleware/auth");
 
 router.get("/info/:id", (req, res) => { responseHandler(userLib.readUserInfo(req.params.id), res) })
 
+router.get("/authCode/:id", (req, res) => { responseHandler(userLib.createAuthCode(req.params.id), res) })
+
 router.get("/auth", auth, (req, res) => {
         res.status(200).json({
             _id: req.user._id,
@@ -22,6 +24,8 @@ router.get("/auth", auth, (req, res) => {
 });
 
 router.post("/register", (req, res) => { responseHandler(userLib.createUser(req.body), res) })
+
+router.put("/emailAuth/:id", (req, res) => { responseHandler(userLib.emailAuth(req.params.id, req.body.authCode), res) })
 
 router.put("/admin/:id", (req, res) => { responseHandler(userLib.setAdmin(req.params.id), res) })
 
