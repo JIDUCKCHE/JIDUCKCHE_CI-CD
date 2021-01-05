@@ -13,6 +13,7 @@
     "core-js": "^3.8.1",
     "formik": "^2.2.1",
     "http-proxy-middleware": "^1.0.6",
+    "pure-react-carousel": "^1.27.6",
     "react": "^17.0.1",
     "react-calendar": "^3.2.1",
     "react-dom": "^17.0.1",
