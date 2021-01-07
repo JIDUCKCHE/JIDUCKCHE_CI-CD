@@ -12,6 +12,7 @@ function Comment(props) {
 
     const user = useSelector(state => state.user)
     const prodId = props.prodId
+    const noticeId = props.noticeId
     const [commentValue, setcommentValue] = useState("")
 
     const handleClick = (e) => {
@@ -21,11 +22,13 @@ function Comment(props) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const variables = {
+        let variables = {
             content: commentValue,
             userId: user.userData._id,
-            prodId: prodId
         }
+        if (prodId) { variables.prodId = prodId }
+        if (noticeId) { variables.noticeId = noticeId }
+
         Axios.post('/api/comment/', variables)
             .then(response => {
                 if(response.data.success) {
@@ -48,8 +51,8 @@ function Comment(props) {
             {props.commentLists && props.commentLists.map((comment, index) => (
                 (!comment.responseTo &&
                     <React.Fragment>
-                        <SingleComment refreshFunction={props.refreshFunction} comment={comment} prodId={prodId}/>
-                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} prodId={prodId} comment={props.commentLists}/>
+                        <SingleComment refreshFunction={props.refreshFunction} comment={comment} prodId={prodId} noticeId={noticeId} />
+                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} prodId={prodId} noticeId={noticeId} comment={props.commentLists}/>
                     </React.Fragment>
                 )
             ))

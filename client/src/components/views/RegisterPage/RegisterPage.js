@@ -33,7 +33,7 @@ function RegisterPage(props) {
         e.preventDefault();
 
         if(password !== passwordCheck) {
-            return alert('비밀번호와 비밀번호 확인은 같아야합니다.')
+            return message.warning('비밀번호와 비밀번호 확인은 같아야합니다.')
         }
         let body = {
             name: id,
@@ -127,6 +127,8 @@ function RegisterPage(props) {
                     name="password"
                     value={password}
                     onChange={onChange}
+                    minLength={6}
+                    maxLength={12}
                     style={{
                         maxWidth: '280px',
                         minWidth: '220px',

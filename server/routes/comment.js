@@ -7,7 +7,7 @@ const { responseHandler } = require('./common')
 router.post('/', (req, res) => { responseHandler(commentLib.createComment(req.body), res) })
 
 //Read
-router.get('/', (req, res) => { responseHandler(commentLib.readComments(req.query.prodId), res) })
+router.get('/', (req, res) => { responseHandler(commentLib.readComments(req.query.prodId, req.query.noticeId), res) })
 
 //Update
 router.put('/', (req, res) => { responseHandler(commentLib.updateComment(req.body.commentId, req.body.content), res) })

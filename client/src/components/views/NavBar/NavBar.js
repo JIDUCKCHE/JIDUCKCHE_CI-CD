@@ -20,7 +20,7 @@ function NavBar() {
     return (
         <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
             <div className="menu__logo">
-                <a href="/">지덕체_Beta</a>
+                <a style={{ fontWeight: 'bold', fontSize: '20px', color: '#FFB641' }} href="/">지덕체_Beta</a>
             </div>
             <div className="menu__container">
                 <div className="menu_left">

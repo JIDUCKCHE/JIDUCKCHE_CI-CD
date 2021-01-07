@@ -3,12 +3,15 @@ import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
+import Comment from '../commons/Comment'
 
 function NoticeDetailPage(props) {
 
     const user = useSelector(state => state.user)
     const noticeId = props.match.params.noticeId
     const [Notice, setNotice] = useState([])
+    const [Comments, setComments] = useState([])
+
 
     useEffect(() => {
         Axios.get(`/api/notice/info/${noticeId}`)
@@ -19,6 +22,7 @@ function NoticeDetailPage(props) {
                     alert('공지사항 정보를 가져오는데 실패했습니다.')
                 }
             })
+            refreshFunction()
     }, [])
 
     const onModifyClick = (e) => {
@@ -26,7 +30,23 @@ function NoticeDetailPage(props) {
         props.history.push(`/notice/modify/${noticeId}`)
     }
 
+    const variable = {
+        noticeId: noticeId
+    }
+
+    const refreshFunction = () => {
+        Axios.get('/api/comment', { params: variable })
+            .then(response => {
+                if(response.data.success) {
+                    setComments(response.data.result)
+                } else {
+                    alert('코멘트 정보를 가져오는 것을 실패했습니다.')
+                }
+            })
+    }
+
     const onDeleteClick = (e) => {
+        e.preventDefault();
         Axios.delete(`/api/notice/${noticeId}`)
             .then(response => {
                 if(response.data.success) {
@@ -54,6 +74,9 @@ function NoticeDetailPage(props) {
                         <button onClick={onDeleteClick}>삭제하기</button>
                     </div>
                     }
+                </div>
+                <div style={{ width: '100%', padding: '3rem 4rem', textAlign: 'left' }}>
+                    <Comment refreshFunction={refreshFunction} commentLists={Comments} noticeId={noticeId} number={Comments.length}/>
                 </div>
             </div>
             

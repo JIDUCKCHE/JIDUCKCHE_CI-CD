@@ -18,8 +18,10 @@ async function createComment(save) {
 
 
 //Read
-async function readComments(prodId) {
-    const variable = { prodId: prodId }
+async function readComments(prodId, noticeId) {
+    let variable = {}
+    if (prodId) { variable = { prodId: prodId } }
+    if (noticeId) { variable = { noticeId: noticeId } }
 
     try {
         result = await read_dao.findList(variable, Comment)

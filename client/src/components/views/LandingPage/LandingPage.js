@@ -49,11 +49,11 @@ function LandingPage(props) {
             {/* 하단 전체 */}
             <div style={{ width: '100%', height: '100%', margin: '1rem auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 {/* 내부 박스 1 */}
-                <div style={{ display: 'flex', backgroundColor: '#ffdf80', width: '90%', borderRadius: '1rem', alignItems: 'center', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', backgroundColor: 'white', width: '80%', borderRadius: '1rem', alignItems: 'center', flexDirection: 'column' }}>
                     {/* 내부 박스 아이템 */}
                     <div style={{ display: 'inline-block', width: '90%', marginBottom: '2rem', marginTop: '1rem', alignItems: 'center' }} >
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <text style={{ color: 'grey', fontSize: '18px', fontWeight: '500' }}> 인기있는 굿즈 </text>
+                            <text style={{ color: 'black', fontSize: '18px', fontWeight: '500' }}> 인기있는 굿즈 </text>
                             <a style={{ color: 'grey' }} href='/ranking'> 더보기 </a>
                         </div>
                         <hr style={{ color: 'grey',  }} />
@@ -74,11 +74,11 @@ function LandingPage(props) {
                     </div>
                 </div>
                 <hr />
-                <div style={{ display: 'flex', backgroundColor: 'whitesmoke', width: '90%', borderRadius: '1rem', alignItems: 'center', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', backgroundColor: 'white', width: '80%', borderRadius: '1rem', alignItems: 'center', flexDirection: 'column' }}>
                     {/* 내부 박스 아이템 */}
                     <div style={{ display: 'inline-block', width: '90%', marginBottom: '2rem', marginTop: '1rem', alignItems: 'center' }} >
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <text style={{ color: 'grey', fontSize: '18px', fontWeight: '500' }}> 새로운 굿즈 </text>
+                            <text style={{ color: 'black', fontSize: '18px', fontWeight: '500' }}> 새로운 굿즈 </text>
                             <a style={{ color: 'grey' }} href='/newProd'> 더보기 </a>
                         </div>
                         <hr style={{ color: 'grey',  }} />

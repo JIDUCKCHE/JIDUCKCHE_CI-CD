@@ -12,7 +12,6 @@ function SingleComment(props) {
 
     const user = useSelector(state => state.user)
     const userId = localStorage.getItem('userId')
-    console.log(props.comment.userId)
 
     const [OpenReply, setOpenReply] = useState(false)
     const [OpenModify, setOpenModify] = useState(false)
@@ -61,9 +60,11 @@ function SingleComment(props) {
             const variables = {
                 content: ReplyCommentValue,
                 userId: user.userData._id,
-                prodId: props.prodId,
                 responseTo: props.comment._id
             }
+            if (props.prodId) { variables.prodId = props.prodId }
+            if (props.noticeId) { variables.noticeId = props.noticeId }
+
             Axios.post('/api/comment/', variables)
                 .then(response => {
                     if(response.data.success) {
@@ -99,16 +100,16 @@ function SingleComment(props) {
     }
 
     const actions_owner = [
-        <Like prodId={props.prodId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
+        <Like comment prodId={props.prodId} noticeId={props.noticeId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
         ,<span onClick={onClickReplyOpen} key="comment-basic-reply-to" style={{margin: '0 0 0 10px'}}>Reply to</span>
         ,<span onClick={onClickModify} key="comment-modify" style={{margin: '0 0 0 10px'}}>modify</span>
         ,<span onClick={onClickDelete} key="comment-delete" style={{margin: '0 0 0 10px'}}>delete</span>
     ]
 
     const actions_general = user.userData.isAuth ?[
-        <Like prodId={props.prodId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
+        <Like comment prodId={props.prodId} noticeId={props.noticeId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
         ,<span onClick={onClickReplyOpen} key="comment-basic-reply-to" style={{margin: '0 0 0 10px'}}>Reply to</span>
-    ]:[<Like prodId={props.prodId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>]
+    ]:[<Like comment prodId={props.prodId} noticeId={props.noticeId} userId={localStorage.getItem('userId')} commentId={props.comment._id}/>]
 
     return (
         <div>

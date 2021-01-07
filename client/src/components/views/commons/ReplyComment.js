@@ -23,8 +23,8 @@ function ReplyComment(props) {
                 {
                     comment.responseTo === parentCommentId &&
                     <div style={{ width: '80%', marginLeft: '40px' }}>
-                        <SingleComment refreshFunction={props.refreshFunction} comment={comment} prodId={props.prodId}/>
-                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} prodId={props.prodId} comment={props.comment}/>
+                        <SingleComment refreshFunction={props.refreshFunction} comment={comment} prodId={props.prodId} noticeId={props.noticeId} />
+                        <ReplyComment refreshFunction={props.refreshFunction} parentCommentId={comment._id} prodId={props.prodId} noticeId={props.noticeId} comment={props.comment}/>
                     </div>
                 }
 

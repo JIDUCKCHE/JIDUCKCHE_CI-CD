@@ -4,11 +4,9 @@ import Axios from 'axios'
 
 function Like(props) {
     let variable = { }
-    if(props.prod) {
-        variable = { prodId: props.prodId, userId: props.userId }
-    } else {
-        variable = { prodId: props.prodId, commentId: props.commentId, userId: props.userId }
-    }
+    if (props.prodId) { variable = { prodId: props.prodId, userId: props.userId } }
+    if (props.noticeId) { variable = { noticeId: props.noticeId, userId: props.userId } }
+    if (props.commentId) { variable.commentId = props.commentId }
 
     const [Likes, setLikes] = useState(0)
     const [LikeAction, setLikeAction] = useState(null)
