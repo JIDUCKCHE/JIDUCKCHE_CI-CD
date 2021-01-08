@@ -49,17 +49,17 @@ function RightMenu(props) {
         return (
             <Menu mode={props.mode}>
                 <Menu.Item key="mail">
-                    <a href="/login">Signin</a>
+                    <a href="/login" style={{ fontWeight: 'bold' }}>로그인</a>
                 </Menu.Item>
                 <Menu.Item key="app">
-                    <a href="/register">Signup</a>
+                    <a href="/register" style={{ fontWeight: 'bold' }}>회원가입</a>
                 </Menu.Item>
             </Menu>
         )
     } else {
         return (
             <Menu mode={props.mode}>
-                <SubMenu key="artist" title="Artist">
+                <SubMenu key="artist" title="아티스트" style={{ fontWeight: 'bold' }}>
                     {Ents && Artists &&
                         Ents.map((ent, index) => (
                             <SubMenu key={index} title={ent.name}>
@@ -81,10 +81,10 @@ function RightMenu(props) {
                     }
                 </SubMenu>
                 <Menu.Item key="upload">
-                    <a href="/mypage">MyPage</a>
+                    <a href="/mypage" style={{ fontWeight: 'bold' }}>마이페이지</a>
                 </Menu.Item>
                 <Menu.Item key="logout">
-                    <a onClick={logoutHandler}>Logout</a>
+                    <a onClick={logoutHandler} style={{ fontWeight: 'bold' }}>로그아웃</a>
                 </Menu.Item>
             </Menu>
         )

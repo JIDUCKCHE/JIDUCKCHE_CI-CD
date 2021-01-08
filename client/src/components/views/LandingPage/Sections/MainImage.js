@@ -58,9 +58,9 @@ function MainImage(props) {
                             <div style={{ position: 'relative', width: '30%', height: '100px', top: '250px', left: '50px', zIndex: 1 }}>
                                 <h2 style={{ color: 'white', fontSize: '30px', fontWeight: '500' }}> {banner._id.name} </h2>
                                 <p style={{ color: 'white', fontSize: '15px' }}>{banner._id.content}</p>
-                                <div style={{ width: '70%', height: '2px', backgroundColor: 'grey', marginTop: '0.3rem', position: 'absolute' }}>
-                                    <div style={{ width : `${100*((Page+1)/Banner.length)}%`, backgroundColor: 'white', height: '100%', position: 'relative' }} />
-                                </div>
+                            </div>
+                            <div style={{ width: '20%', height: '2px', backgroundColor: 'grey', marginTop: '0.3rem', position: 'absolute', top: '360px', left: '50px', zIndex: 1 }}>
+                                <div style={{ width : `${100*((Page+1)/Banner.length)}%`, backgroundColor: 'white', height: '100%', position: 'relative' }} />
                             </div>
                         </div>
                     </a>

@@ -36,7 +36,8 @@ function UploadPage(props) {
             Axios.get('/api/artist/')
                 .then(response => {
                     if (response.data.success) {
-                        setArtist(response.data.result)
+                        setArtist(response.data.result);
+                        setCategory(response.data.result[0]);
                     } else {
                         alert('아티스트 정보를 가져오는데 실패했습니다.')
                     }

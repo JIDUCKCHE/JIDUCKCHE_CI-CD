@@ -31,24 +31,24 @@ function LeftMenu(props) {
             return (
                 <Menu mode={props.mode}>
                     <Menu.Item key="mail">
-                        <a href="/notice">Notice</a>
+                        <a href="/notice" style={{ fontWeight: 'bold' }}>공지사항</a>
                     </Menu.Item>
                     {user.userData && user.userData.isAdmin ?
-                    <SubMenu title={<span>Uploads</span>}>
+                    <SubMenu title={<span>업로드</span>} style={{ fontWeight: 'bold' }}>
                         <Menu.Item key="mail">
-                            <a href="/upload">Upload</a>
+                            <a href="/upload">업로드</a>
                         </Menu.Item>
                         <Menu.Item key="mail">
-                            <a href="/uploadEnt">EntUpload</a>
+                            <a href="/uploadEnt">엔터 업로드</a>
                         </Menu.Item>
                         <Menu.Item key="mail">
-                            <a href="/uploadArtist">ArtistUpload</a>
+                            <a href="/uploadArtist">아티스트 업로드</a>
                         </Menu.Item>
                     </SubMenu>
                     :
-                    <SubMenu title={<span>Uploads</span>}>
+                    <SubMenu title={<span>업로드</span>}>
                         <Menu.Item key="mail">
-                            <a href="/upload">Upload</a>
+                            <a href="/upload">업로드</a>
                         </Menu.Item>
                     </SubMenu>
                     }
@@ -60,7 +60,7 @@ function LeftMenu(props) {
             return (
                 <Menu mode={props.mode}>
                     <Menu.Item key="mail">
-                        <a href="/notice">Notice</a>
+                        <a href="/notice" style={{ fontWeight: 'bold' }}>공지사항</a>
                     </Menu.Item>
                 </Menu>
             )

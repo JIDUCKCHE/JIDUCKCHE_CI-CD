@@ -3,6 +3,7 @@ import { Drawer, Button, Icon } from 'antd';
 import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 import './Sections/Navbar.css'
+import Logo from '../commons/ducku512.png'
 
 function NavBar() {
 
@@ -19,8 +20,11 @@ function NavBar() {
 
     return (
         <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
-            <div className="menu__logo">
-                <a style={{ fontWeight: 'bold', fontSize: '20px', color: '#FFB641' }} href="/">지덕체_Beta</a>
+            <div className="menu__logo" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: '68px' }}>
+                <a style={{ fontWeight: 'bold', fontSize: '20px', color: '#FFB641' }} href="/">
+                    <img src={Logo} alt="더쿠아이콘" style={{ width: '48px', height: '48px', marginRight: '1rem', padding: 'auto' }} />
+                    <span>지덕체</span>
+                </a>
             </div>
             <div className="menu__container">
                 <div className="menu_left">
