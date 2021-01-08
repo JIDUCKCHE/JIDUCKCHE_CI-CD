@@ -60,6 +60,10 @@ function RegisterPage(props) {
         if(password !== passwordCheck) {
             return message.warning('비밀번호와 비밀번호 확인은 같아야합니다.')
         }
+        if (NameDup || EmailDup) {
+            return message.warning('닉네임 또는 이메일이 중복됩니다.')
+        }
+
         let body = {
             name: id,
             email: email,
