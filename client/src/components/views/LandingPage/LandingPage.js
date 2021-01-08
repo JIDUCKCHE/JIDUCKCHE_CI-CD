@@ -37,7 +37,7 @@ function LandingPage(props) {
     }, [])
 
     return (
-        <div style={{ width: '100%', margin: '0' }}>
+        <div style={{ width: '100%', margin: '0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {MainProd &&
                 <MainImage
                     image={`${MainProd.preImagePath}`}
