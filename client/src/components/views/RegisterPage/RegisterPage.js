@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { registerUser } from '../../../_actions/user_action'
 import { withRouter } from 'react-router-dom'
 import { message } from 'antd'
+import Axios from 'axios'
 
 function RegisterPage(props) {
     const dispatch = useDispatch();
@@ -13,6 +14,8 @@ function RegisterPage(props) {
         password: "",
         passwordCheck: ""
     });
+    const [EmailDup, setEmailDup] = useState(false)
+    const [NameDup, setNameDup] = useState(false)
 
     const {
         id,
@@ -27,7 +30,29 @@ function RegisterPage(props) {
             ...values,
             [name]: value
         });
+        if (value != "") checkDup(value, name)
+        else {
+            setNameDup(false)
+            setEmailDup(false)
+        }
     };
+
+    const checkDup = (value, type) => {
+        let params = {}
+        if (type == 'id') { params = { id: value } }
+        if (type == 'email') { params = { email: value } }
+
+        Axios.get(`api/user/dup`, { params: params })
+            .then(response => {
+                if (response.data.result == 'success') {
+                    if (type == 'id') setNameDup(false)
+                    if (type == 'email') setEmailDup(false)
+                } else {
+                    if (type == 'id') setNameDup(true)
+                    if (type == 'email') setEmailDup(true)
+                }
+            })
+    }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -102,9 +127,12 @@ function RegisterPage(props) {
                         height: '40px',
                         margin: '5px',
                         borderRadius: '5px',
-                        border: '1px solid rgba(0,0,0,0.2)',
+                        border: `${NameDup ? '1px solid rgba(255,0,0,255)' : '1px solid rgba(0,0,0,0.2)'}`,
                     }}
                 />
+                {NameDup &&
+                    <span style={{ color: 'red' }}>이미 사용 중인 닉네임 입니다.</span>
+                }
                 <input
                     type="email"
                     placeholder="이메일을 입력하세요"
@@ -118,9 +146,12 @@ function RegisterPage(props) {
                         height: '40px',
                         margin: '5px',
                         borderRadius: '5px',
-                        border: '1px solid rgba(0,0,0,0.2)',
+                        border: `${EmailDup ? '1px solid rgba(255,0,0,255)' : '1px solid rgba(0,0,0,0.2)'}`,
                     }}
                 />
+                {EmailDup &&
+                    <span style={{ color: 'red' }}>이미 가입된 이메일 입니다.</span>
+                }
                 <input
                     type="password"
                     placeholder="비밀번호를 입력하세요"

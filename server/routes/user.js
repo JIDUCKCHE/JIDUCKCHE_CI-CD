@@ -23,6 +23,8 @@ router.get("/auth", auth, (req, res) => {
           })
 });
 
+router.get('/dup', (req, res) => { responseHandler(userLib.checkDuplication(req.query.id, req.query.email), res) })
+
 router.post("/register", (req, res) => { responseHandler(userLib.createUser(req.body), res) })
 
 router.put("/emailAuth/:id", (req, res) => { responseHandler(userLib.emailAuth(req.params.id, req.body.authCode), res) })

@@ -12,6 +12,21 @@ async function createUser(save) {
     return await create_dao.saveObject(save, User)
 }
 
+async function checkDuplication(id, email) {
+    let variable = {}
+    if (id) { variable = { name: id } }
+    if (email) { variable = { email: email } }
+
+    try {
+        const result = await read_dao.findList(variable, User)
+        console.log(result)
+        if (result.length > 0) return ('false')
+        if (result.length == 0) return ('success')
+    } catch (error) {
+        throw error
+    }
+}
+
 async function createAuthCode(userId) {
     const variable = { _id: userId }
     try {
@@ -88,6 +103,7 @@ async function doLogout(userId) {
 
 module.exports = {
     createUser,
+    checkDuplication,
     createAuthCode,
     readUserInfo,
     emailAuth,
