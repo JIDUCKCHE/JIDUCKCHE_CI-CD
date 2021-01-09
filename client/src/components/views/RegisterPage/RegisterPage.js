@@ -52,6 +52,9 @@ function RegisterPage(props) {
                     if (type == 'email') setEmailDup(true)
                 }
             })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     const onSubmitHandler = (e) => {
@@ -75,8 +78,11 @@ function RegisterPage(props) {
                         message.success('회원가입이 완료되었습니다.')
                         props.history.push('/login')
                     } else {
-                        alert('Error')
+                        message.error('Error')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }
     }

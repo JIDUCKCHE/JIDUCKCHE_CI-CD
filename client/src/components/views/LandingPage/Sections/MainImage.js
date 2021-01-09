@@ -19,6 +19,9 @@ function MainImage(props) {
                     message.warning('배너 정보를 가져오지 못했습니다.')
                 }
             })
+            .catch(error => {
+                console.log(error)
+            })
     }, [])
     
     console.log(Banner)

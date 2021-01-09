@@ -33,11 +33,14 @@ router.put("/admin/:id", (req, res) => { responseHandler(userLib.setAdmin(req.pa
 
 router.post("/login", (req, res) => {
     userLib.doLogin(req)
-        .then(user => {
-            res.cookie('w_auth', user.token)
-            res.status(200).json({ loginSuccess: true, userId: user._id })
+        .then(result => {
+            console.log(result)
+            if (result.success) res.cookie('w_auth', result.data.token)
+            res.status(200).json({ success: result.success, result: result.data })
         })
-        .catch(err => { res.status(400).json({ loginSuccess: false, message: err }) })
+        .catch(err => { 
+            console.log(err)
+            res.status(400).json({ success: false, message: err }) })
 })
 
 router.get("/logout", auth, (req, res) => { responseHandler(userLib.doLogout(req.user._id), res) })

@@ -6,18 +6,21 @@ const { Artist } = require('../models/Artist');
 
 //Create
 async function createArtist(save) {
-    return await create_dao.saveObject(save, Artist)
+    result = await create_dao.saveObject(save, Artist)
+    return ({ success: true, data: result })
 }
 
 
 //Read
 async function readAllArtists() {
-    return await read_dao.findAll(Artist)
+    result = await read_dao.findAll(Artist)
+    return ({ success: true, data: result })
 }
 
 async function readArtistInfo(artistId) {
     const variable = { _id: artistId }
-    return await read_dao.findOne(variable, Artist)
+    result = await read_dao.findOne(variable, Artist)
+    return ({ success: true, data: result })
 }
 
 module.exports = {

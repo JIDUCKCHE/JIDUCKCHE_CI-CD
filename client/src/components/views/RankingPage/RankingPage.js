@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import GridCard from '../commons/GridCard'
 import { withRouter } from 'react-router-dom'
+import { message } from 'antd'
 
 function RankingPage() {
     
@@ -21,7 +22,14 @@ function RankingPage() {
     useEffect(() => {
         Axios.get(`/api/prod/best/${Page}`)
             .then(response => {
-                setProds(response.data.result)
+                if (response.data.success) {
+                    setProds(response.data.result)
+                } else {
+                    message.warning('인기 상품을 가져오는데 실패했습니다.')
+                }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [Page])
 

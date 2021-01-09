@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import NoticeGrid from './Sections/NoticeGrid'
 import { withRouter } from 'react-router-dom'
+import { message } from 'antd'
 
 function NoticePage() {
 
@@ -16,8 +17,11 @@ function NoticePage() {
                 if(response.data.success) {
                     setNotice(response.data.result)
                 } else {
-                    alert('공지사항을 가져오는데 실패했습니다.')
+                    message.warning('공지사항을 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
         if (userId) {
             Axios.get(`/api/user/info/${userId}`)
@@ -25,8 +29,11 @@ function NoticePage() {
                     if(response.data.success) {
                         setUser(response.data.result)
                     } else {
-                        alert('유저 정보를 가져오는데 실패했습니다.')
+                        message.warning('유저 정보를 가져오는데 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
             }
     }, [])

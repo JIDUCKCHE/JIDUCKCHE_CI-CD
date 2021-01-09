@@ -19,8 +19,11 @@ function NoticeDetailPage(props) {
                 if(response.data.success) {
                     setNotice(response.data.result)
                 } else {
-                    alert('공지사항 정보를 가져오는데 실패했습니다.')
+                    message.warning('공지사항 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
             refreshFunction()
     }, [])
@@ -40,8 +43,11 @@ function NoticeDetailPage(props) {
                 if(response.data.success) {
                     setComments(response.data.result)
                 } else {
-                    alert('코멘트 정보를 가져오는 것을 실패했습니다.')
+                    message.warning('코멘트 정보를 가져오는 것을 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
@@ -55,6 +61,9 @@ function NoticeDetailPage(props) {
                 } else {
                     message.error('삭제에 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 

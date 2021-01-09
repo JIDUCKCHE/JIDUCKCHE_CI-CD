@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import Axios from 'axios';
 import GridCard from '../commons/GridCard';
+import { message } from 'antd';
 
 function ArtistDetailPage(props) {
 
@@ -15,8 +16,11 @@ function ArtistDetailPage(props) {
                 if(response.data.success) {
                     setProds(response.data.result);
                 } else {
-                    alert('상품을 불러오는데 실패 했습니다.')
+                    message.warning('상품을 불러오는데 실패 했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
         Axios.get(`/api/artist/info/${artistId}`)
             .then(response => {
@@ -24,8 +28,11 @@ function ArtistDetailPage(props) {
                     setArtist(response.data.result)
                     console.log(response.data.result)
                 } else {
-                    alert('아티스트 정보를 가져오는데 실패했습니다.')
+                    message.warning('아티스트 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 

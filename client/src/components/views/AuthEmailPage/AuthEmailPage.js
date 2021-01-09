@@ -20,6 +20,9 @@ function AuthEmailPage(props) {
                     message.error('인증코드 발송에 실패했습니다.')
                 }
             })
+            .catch(error => {
+                console.log(error)
+            })
     }, [])
 
     const onChange = (e) => {
@@ -43,6 +46,9 @@ function AuthEmailPage(props) {
                             setValue("")
                         }
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }
 

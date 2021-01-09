@@ -22,8 +22,9 @@ async function readNotices(page) {
         { $limit: 8 },
         { $lookup: { from: 'comments', localField: '_id', foreignField: 'noticeId', as: 'comment' } }
     ]
-    const result = await read_dao.findWithAggregate(pipeline, Notice)
-    return await read_dao.population(result, User, "userId")
+    result = await read_dao.findWithAggregate(pipeline, Notice)
+    result = await read_dao.population(result, User, "userId")
+    return ({ success: true, data: result })
 }
 
 async function readNoticeInfo(noticeId) {
@@ -31,7 +32,8 @@ async function readNoticeInfo(noticeId) {
 
     try {
         result = await read_dao.findOne(variable, Notice)
-        return await read_dao.population(result, User, "userId")
+        result = await read_dao.population(result, User, "userId")
+        return ({ success: true, data: result })
     } catch (error) {
         throw error
     }
@@ -44,14 +46,16 @@ async function readMainNotice() {
         { $match: { 'createdAt': { $gt: limitDate } } },
         { $sort: { 'createdAt': -1 } },
     ]
-    const result = await read_dao.findWithAggregate(pipeline, Notice)
-    return await read_dao.population(result, User, "userId")
+    result = await read_dao.findWithAggregate(pipeline, Notice)
+    result = await read_dao.population(result, User, "userId")
+    return ({ success: true, data: result })
 }
 
 //Update
 async function updateNotice(noticeId, update) {
     const variable = { _id: noticeId }
-    return await update_dao.findAndUpate(variable, update, Notice)
+    result = await update_dao.findAndUpate(variable, update, Notice)
+    return ({ success: true, data: result })
 }
 
 
@@ -59,10 +63,12 @@ async function updateNotice(noticeId, update) {
 async function deleteNotice(noticeId) {
     const variable = { _id: noticeId }
     try {
-        return await Promise.all([
+        result = await Promise.all([
             delete_dao.findOneAndDelete(variable, Notice),
             delete_dao.findAndDelete({ noticeId: noticeId }, Comment)
-    ])} catch (error) {
+    ])
+    return ({ success: true, data: result })
+    } catch (error) {
         throw error
     }
 }

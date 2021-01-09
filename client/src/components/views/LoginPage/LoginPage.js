@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../../../_actions/user_action'
 import { withRouter } from 'react-router-dom'
+import { message } from 'antd';
 
 function LoginPage(props) {
 
@@ -26,7 +27,6 @@ function LoginPage(props) {
     };
 
     const onSubmitHandler = (e) => {
-
         e.preventDefault();
 
         let body ={
@@ -36,12 +36,20 @@ function LoginPage(props) {
 
         dispatch(loginUser(body))
             .then(response => {
-                if (response.payload.loginSuccess){
-                    window.localStorage.setItem('userId', response.payload.userId)
+                console.log(response)
+                if (response.payload.success){
+                    window.localStorage.setItem('userId', response.payload.result._id)
                     props.history.push('/')
                 } else {
-                    alert('로그인에 실패했습니다.')
+                    message.warning('이메일 또는 비밀번호가 틀렸습니다.')
+                    setValues({
+                        email: '',
+                        password: ''
+                    })
                 }
+            })
+            .catch (err => {
+                console.log(err)
             })
     }
 

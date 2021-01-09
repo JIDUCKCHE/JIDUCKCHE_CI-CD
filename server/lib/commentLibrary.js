@@ -10,7 +10,8 @@ const update_dao = require('../models/dao/update_dao');
 async function createComment(save) {
     try {
         result = await create_dao.saveObject(save, Comment)
-        return await read_dao.population(result, User, "userId")
+        result = await read_dao.population(result, User, "userId")
+        return ({ success: true, data: result })
     } catch(error) {
         throw error
     }
@@ -25,7 +26,8 @@ async function readComments(prodId, noticeId) {
 
     try {
         result = await read_dao.findList(variable, Comment)
-        return await read_dao.population(result, User, "userId")
+        result = await read_dao.population(result, User, "userId")
+        return ({ success: true, data: result })
     } catch(error) {
         throw error
     }
@@ -37,7 +39,8 @@ async function updateComment(commentId, content) {
     const variable = { _id: commentId }
     const update = { content: content, modified: true }
 
-    return await update_dao.findAndUpate(variable, update, Comment)
+    result = await update_dao.findAndUpate(variable, update, Comment)
+    return ({ success: true, data: result })
 }
 
 
@@ -46,7 +49,8 @@ async function deleteComment(commentId) {
     const variable = { _id: commentId }
     const update = { deleted: true }
 
-    return await update_dao.findAndUpate(variable, update, Comment)
+    result = await update_dao.findAndUpate(variable, update, Comment)
+    return ({ success: true, data: result })
 }
 
 

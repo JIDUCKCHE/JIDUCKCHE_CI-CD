@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Tooltip, Icon, List } from 'antd'
+import { Tooltip, Icon, List, message } from 'antd'
 import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import Like from '../commons/Like'
@@ -34,8 +34,11 @@ function ProdDetailPage(props) {
                     setPreImage(response.data.result.preImage)
                     setDDay(moment(response.data.result.endDate).diff(today, 'days'))
                 } else {
-                    alert('게시글 정보를 가져오는데 실패했습니다.')
+                    message.warning('게시글 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
             if (user) {
                 Axios.get(`/api/user/info/${user}`)
@@ -43,8 +46,11 @@ function ProdDetailPage(props) {
                         if(response.data.success) {
                             setUser(response.data.result)
                         } else {
-                            alert('유저 정보를 가져오는데 실패했습니다.')
+                            message.warning('유저 정보를 가져오는데 실패했습니다.')
                         }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
                 }
         refreshFunction()
@@ -56,8 +62,11 @@ function ProdDetailPage(props) {
                 if(response.data.success) {
                     setComments(response.data.result)
                 } else {
-                    alert('코멘트 정보를 가져오는 것을 실패했습니다.')
+                    message.warning('코멘트 정보를 가져오는 것을 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
@@ -68,11 +77,14 @@ function ProdDetailPage(props) {
                     if(response.data.success) {
                         props.history.push('/')
                     } else {
-                        alert('상품 삭제에 실패했습니다.')
+                        message.warning('상품 삭제에 실패했습니다.')
                     }
                 })
+                .catch(error => {
+                    console.log(error)
+                })
             } else {
-                alert('해당 상품 작성자만 삭제할 수 있습니다.')
+                message.error('해당 상품 작성자만 삭제할 수 있습니다.')
             }
         }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import Axios from 'axios'
-import { Row } from 'antd'
+import { Row, message } from 'antd'
 import MainImage from './Sections/MainImage'
 import GridCards from '../commons/GridCards'
 // import Modal from '../commons/Modal'
@@ -16,9 +16,12 @@ function LandingPage(props) {
     useEffect(() => {
         Axios.get('/api/prod/best/0')
             .then(response => {
-                console.log(response.data)
-                setBestProds(response.data.result)
-                setMainProd(response.data.result[0]._id)
+                if (response.data.success) {
+                    setBestProds(response.data.result)
+                    setMainProd(response.data.result[0]._id)
+                } else {
+                    message.warning('인기 상품 정보를 가져오지 못했습니다.')
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -28,8 +31,11 @@ function LandingPage(props) {
     useEffect(() => {
         Axios.get(`/api/prod/`,{ params: { startId: 0, endId: 0 } })
             .then(response => {
-                console.log(response.data)
-                setProds(response.data.result)
+                if (response.data.success) {
+                    setProds(response.data.result)
+                } else {
+                    message.warning('최신 상품 정보를 가져오지 못했습니다.')
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -100,6 +106,7 @@ function LandingPage(props) {
                 </div>
                 <div style={{ backgroundColor: 'whitesmoke', width: '100%', height: '0.5px', marginTop: '1rem', marginBottom: '1rem' }} />
                 <div style={{ display: 'flex', width: '80%', borderRadius: '1rem', alignItems: 'center', flexDirection: 'column' }}>
+
                 </div>
             </div>
         </div>

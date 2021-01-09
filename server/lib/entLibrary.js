@@ -6,13 +6,15 @@ const { Ent } = require('../models/Ent')
 
 //Create
 async function createEnt(save) {
-    return await create_dao.saveObject(save, Ent)
+    result = await create_dao.saveObject(save, Ent)
+    return ({ success: true, data: result })
 }
 
 
 //Read
 async function readAllEnts() {
-    return await read_dao.findAll(Ent)
+    result = await read_dao.findAll(Ent)
+    return ({ success: true, data: result })
 }
 
 module.exports = {

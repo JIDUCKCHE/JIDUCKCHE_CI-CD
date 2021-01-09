@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import Axios from 'axios'
 import GridCard from '../commons/GridCard'
+import { message } from 'antd'
 
 function NewProdPage() {
     
@@ -31,11 +32,17 @@ function NewProdPage() {
     useEffect(() => {
         Axios.get(`/api/prod/`, { params: { startId: StartId, endId: EndId }})
             .then(response => {
-                setProds([...Prods,...response.data.result])
-                setStartId(StartId === 0 ? response.data.result[0]._id : maxFunc(Prods[0]._id, response.data.result[0]._id))
-                setEndId(EndId === 0 ? response.data.result[response.data.result.length - 1]._id : minFunc(Prods[Prods.length - 1]._id, response.data.result[response.data.result.length - 1]._id))
+                if (response.data.success) {
+                    setProds([...Prods,...response.data.result])
+                    setStartId(StartId === 0 ? response.data.result[0]._id : maxFunc(Prods[0]._id, response.data.result[0]._id))
+                    setEndId(EndId === 0 ? response.data.result[response.data.result.length - 1]._id : minFunc(Prods[Prods.length - 1]._id, response.data.result[response.data.result.length - 1]._id))
+                } else {
+                    message.warning('새로운 상품을 가져오는데 실패했습니다.')
+                }
             })
-            .catch(err => { console.log(err) })
+            .catch(error => {
+                console.log(error)
+            })
     }, [Page])
 
     useEffect(() => {

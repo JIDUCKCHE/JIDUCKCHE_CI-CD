@@ -47,8 +47,11 @@ function UploadNoticePage(props) {
                     message.success('성공적으로 업로드를 완료했습니다.')
                     props.history.push('/')
                 } else {
-                    alert('데이터 저장에 실패했습니다.')
+                    message.warning('데이터 저장에 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 

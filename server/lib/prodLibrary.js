@@ -17,9 +17,7 @@ const ObjectId = require('mongodb').ObjectID;
 async function createProd(save, userId) {
     try {
         result = await create_dao.saveObject(save, Prod)
-        const variable = { userId: userId, prodId: result._id }
-        await create_dao.saveObject(variable, Like)
-        return result
+        return ({ success: true, data: result })
     } catch (error) {
         throw error
     }
@@ -38,8 +36,9 @@ async function readProds(startid, endid) {
         { $limit: 8 },
         { $lookup: { from: 'comments', localField: '_id', foreignField: 'prodId', as: 'comment' } }
     ]
-    const result = await read_dao.findWithAggregate(pipeline, Prod)
-    return await read_dao.population(result, User, "userId")
+    result = await read_dao.findWithAggregate(pipeline, Prod)
+    result = await read_dao.population(result, User, "userId")
+    return ({ success: true, data: result })
 }
 
 async function readBestProds(page) {
@@ -54,7 +53,8 @@ async function readBestProds(page) {
     try {
         result = await read_dao.findWithAggregate(pipeline, Like)
         result = await read_dao.population(result, Prod, "_id")
-        return await read_dao.population(result, User, "_id.userId")
+        result = await read_dao.population(result, User, "_id.userId")
+        return ({ success: true, data: result })
     } catch(error) {
         throw error
     }
@@ -66,7 +66,8 @@ async function readProdInfo(prodId) {
     try {
         result = await read_dao.findOne(variable, Prod)
         result = await read_dao.population(result, User, "userId")
-        return await read_dao.population(result, Artist, "artistId")
+        result = await read_dao.population(result, Artist, "artistId")
+        return ({ success: true, data: result })
     } catch (error) {
         throw error
     }
@@ -78,7 +79,8 @@ async function readMyProds(userId) {
         { $limit: 8 },
         { $lookup: { from: 'comments', localField: '_id', foreignField: 'prodId', as: 'comment' } }
     ]
-    return await read_dao.findWithAggregate(pipeline, Prod)
+    result = await read_dao.findWithAggregate(pipeline, Prod)
+    return ({ success: true, data: result })
 }
 
 
@@ -91,7 +93,8 @@ async function readAritstProds(artistId) {
     
     try {
         result = await read_dao.findWithAggregate(pipeline, Prod)
-        return await read_dao.population(result, User, "userId")
+        result = await read_dao.population(result, User, "userId")
+        return ({ success: true, data: result })
     } catch (error) {
         throw error
     }
@@ -105,7 +108,8 @@ async function readMyLikeProds(userId) {
     ]
     try {
         result = await read_dao.findWithAggregate(pipeline, Like)
-        return await read_dao.population(result, Prod, "prodId")
+        result = await read_dao.population(result, Prod, "prodId")
+        return ({ success: true, data: result })
     } catch(error) {
         throw error
     }
@@ -115,7 +119,8 @@ async function readMyLikeProds(userId) {
 //Update
 async function updateProd(prodId, update) {
     const variable = { _id: prodId }
-    return await update_dao.findAndUpate(variable, update, Prod)
+    result = await update_dao.findAndUpate(variable, update, Prod)
+    return ({ success: true, data: result })
 }
 
 
@@ -123,13 +128,15 @@ async function updateProd(prodId, update) {
 async function deleteProd(prodId, originName, preName) {
     const variable = { _id: prodId }
     try {
-        return await Promise.all([
+        result = await Promise.all([
             fileLibrary.moveToTrash(originName, "prod", (err) => { throw (err) }),
             fileLibrary.moveToTrash(preName, "pre", (err) => { throw (err) }),
             delete_dao.findOneAndDelete(variable, Prod),
             delete_dao.findAndDelete({ prodId: prodId }, Like),
             delete_dao.findAndDelete({ prodId: prodId }, Comment)
-    ])} catch (error) {
+    ])
+    return ({ success: true, data: result })
+    } catch (error) {
         throw error
     }
 }

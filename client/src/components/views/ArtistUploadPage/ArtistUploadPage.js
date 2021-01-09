@@ -27,13 +27,16 @@ function ArtistUploadPage() {
     const uuid = v4();
 
     useEffect(() => {
-        Axios.get(`/api/ent/`)
+        Axios.get(`/api/ent`)
             .then(response => {
                 if (response.data.success) {
                     setEnts(response.data.result)
                 } else {
-                    alert('아티스트 정보를 가져오는데 실패했습니다.')
+                    message.warning('아티스트 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 
@@ -91,15 +94,21 @@ function ArtistUploadPage() {
 
             let image = await Axios.post('/api/ent/getUrl', {name: uuid + originFilename})
                 .then(response => {
-                        return (response.data.result)
+                    if (response.data.success) return (response.data.result)
+                    else message.warning('이미지 업로드에 실패했습니다.')
+                })
+                .catch(error => {
+                    console.log(error)
                 })
 
             Axios.put(image.postURL, OriginFile)
                 .then(response => {
-                    console.log(response)
                     if(response.status !== 200) {
-                        alert('이미지 업로드에 실패했습니다.')
+                        message.warning('이미지 업로드에 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
 
             const variable = {
@@ -120,8 +129,11 @@ function ArtistUploadPage() {
                             setImageExt(null)
                         }, 1000);
                     } else {
-                        alert('데이터 저장에 실패했습니다.')
+                        message.warning('데이터 저장에 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
             }
     }

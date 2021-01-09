@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, Button } from 'antd'
+import { Input, Button, message } from 'antd'
 import Axios from 'axios'
 import { useSelector } from 'react-redux'
 import SingleComment from './SingleComment'
@@ -35,8 +35,11 @@ function Comment(props) {
                     props.refreshFunction()
                     setcommentValue("")
                 } else {
-                    alert('댓글을 저장하지 못했습니다.')
+                    message.warning('댓글을 저장하지 못했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
     return (

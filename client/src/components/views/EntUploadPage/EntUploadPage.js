@@ -30,11 +30,11 @@ function EntUploadPage(props) {
             const currentFileType = currentFile.type
             const currentFileSize = currentFile.size
             if(currentFileSize > imageMaxSize) {
-                alert('이 파일은 너무 큽니다. ' + imageMaxSize/1024/1024 + 'MB이하의 파일만 가능합니다')//maxsize 알려주기
+                message.error('이 파일은 너무 큽니다. ' + imageMaxSize/1024/1024 + 'MB이하의 파일만 가능합니다')//maxsize 알려주기
                 return false
             }
             if(!acceptedFileTypesArray.includes(currentFileType)){
-                alert('이 파일은 지원하지 않습니다.')
+                message.error('이 파일은 지원하지 않습니다.')
                 return false
             }
             return true
@@ -71,15 +71,21 @@ function EntUploadPage(props) {
 
             let image = await Axios.post('/api/ent/getUrl', {name: uuid + originFilename})
                 .then(response => {
-                        return (response.data.result)
+                    if (response.data.success) return (response.data.result)
+                    else message.warning('이미지 업로드에 실패했습니다.')
+                })
+                .catch(error => {
+                    console.log(error)
                 })
 
             Axios.put(image.postURL, OriginFile)
                 .then(response => {
-                    console.log(response)
                     if(response.status !== 200) {
-                        alert('이미지 업로드에 실패했습니다.')
+                        message.warning('이미지 업로드에 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
 
             const variable = {
@@ -99,8 +105,11 @@ function EntUploadPage(props) {
                             setImageExt(null)
                         }, 1000);
                     } else {
-                        alert('데이터 저장에 실패했습니다.')
+                        message.warning('데이터 저장에 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
             }
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import GridCards from '../commons/GridCards';
-import { Row } from 'antd';
+import { Row, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 function MyPage() {
@@ -17,8 +17,11 @@ function MyPage() {
                 if (response.data.success) {
                     setLikeProds(response.data.result)
                 } else {
-                    alert('좋아요 목록을 가져오는데 실패했습니다.')
+                    message.warning('좋아요 목록을 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
         
         Axios.get(`/api/prod/my/${user}`)
@@ -26,8 +29,11 @@ function MyPage() {
                 if (response.data.success) {
                     setMyProds(response.data.result)
                 } else {
-                    alert('나의 게시물을 가져오는데 실패했습니다.')
+                    message.warning('나의 게시물을 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 

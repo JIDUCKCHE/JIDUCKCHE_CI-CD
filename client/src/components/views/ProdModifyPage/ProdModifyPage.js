@@ -43,14 +43,18 @@ function UploadPage(props) {
                     if (response.data.success) {
                         setArtist(response.data.result)
                     } else {
-                        alert('아티스트 정보를 가져오는데 실패했습니다.')
+                        message.warning('아티스트 정보를 가져오는데 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
             
             Axios.get(`/api/prod/info/${prodId}`)
                 .then(response => {
                     if (response.data.success) {
                         if (response.data.result.userId._id !== user) {
+                            message.error('잘못된 접근입니다.')
                             props.history.push('/')
                         }
                         setCategory(response.data.result.artistId._id)
@@ -64,8 +68,11 @@ function UploadPage(props) {
                         setStartDate(new Date(response.data.result.startDate))
                         setEndDate(new Date(response.data.result.endDate))
                     } else {
-                        alert('상품 정보를 가져오는데 실패했습니다.')
+                        message.warning('상품 정보를 가져오는데 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }, [])
 
@@ -100,54 +107,67 @@ function UploadPage(props) {
                 const preFilename = FileName + "_preview." + imgSrcExt
                 const originFilename = FileName + '.' + imgSrcExt
                 const newCroppedFile = base64StringtoFile(imageData64, preFilename)
-                // let originFormData = new FormData;
-                // let preFormData = new FormData;
-                // const config = {
-                //     header: {'content-type': 'multipart/form-data'}
-                // }
-                // originFormData.append("file", OriginFile)
-                // preFormData.append("file", newCroppedFile)
 
                 await Axios.post('/api/prod/deleteImage', { name: MainImage })
                     .then(response => {
-                        console.log(response)
-                    })
-                await Axios.post('/api/prod/deletePreImage', { name: PreImage })
+                        if (response.data.success) {
 
-                // Axios.post('/api/file/deleteImage', {url: MainImage})
-                //     .then(response => {
-                //         if(!response.data.success) {
-                //             alert('파일 삭제에 실패했습니다.')
-                //         }
-                //     })
-                // Axios.post('/api/file/deleteImage', {url: PreImage})
-                //     .then(response => {
-                //         if(!response.data.success) {
-                //             alert('파일 삭제에 실패했습니다.')
-                //         }
-                //     })
+                        } else {
+                            message.warning('이미지 삭제에 실패했습니다.')
+                        }
+                    })
+                    .catch(error => { console.log(error) })
+                await Axios.post('/api/prod/deletePreImage', { name: PreImage })
+                    .then(response => {
+                        if (response.data.success) {
+
+                        } else {
+                            message.warning('이미지 삭제에 실패했습니다.')
+                        }
+                    })    
+                    .catch(error => { console.log(error) })
 
                 let image = await Axios.post('/api/prod/getUrl', {name: uuid + originFilename})
                     .then(response => {
+                        if(response.data.success) {
                             setMainImage(response.data.filename)
                             setMainImagePath(response.data.getURL)
                             return (response.data)
+                        } else {
+                            message.warning('이미지 업로드에 실패했습니다.')
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
                 await Axios.put(image.postURL, OriginFile)
                     .then(response => {
-
-                    
-                })
+                        if (response.status !== 200) {
+                            message.warning('이미지 업로드에 실패했습니다.')
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
                 let preImage = await Axios.post('/api/prod/getPreUrl', {name: uuid + preFilename})
                     .then(response => {
-                        setPreImage(response.data.filename)
-                        setPreImagePath(response.data.getURL)
-                        return (response.data)
+                        if (response.data.success) {
+                            setPreImage(response.data.filename)
+                            setPreImagePath(response.data.getURL)
+                            return (response.data)
+                        } else {
+                            message.warning('이미지 업로드에 실패했습니다.')
+                        }
                 })
                 await Axios.put(preImage.postURL, newCroppedFile)
                     .then(response => {
-
-                })
+                        if (response.status !== 200) {
+                            message.warning('이미지 업로드에 실패했습니다.')
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             }
             const variable = {
                 'prodId': prodId,
@@ -169,8 +189,11 @@ function UploadPage(props) {
                         message.success('성공적으로 업로드를 완료했습니다.')
                         props.history.push('/')
                     } else {
-                        alert('데이터 저장에 실패했습니다.')
+                        message.warning('데이터 저장에 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }
 

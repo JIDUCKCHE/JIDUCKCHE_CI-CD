@@ -93,8 +93,11 @@ function SingleComment(props) {
                         setCommentValue("")
                         setOpenModify(false)
                     } else {
-                        alert('댓글을 저장하지 못했습니다.')
+                        message.warning('댓글을 저장하지 못했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }
     }

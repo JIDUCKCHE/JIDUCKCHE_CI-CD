@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Tooltip, Icon } from 'antd'
+import { Tooltip, Icon, message } from 'antd'
 import Axios from 'axios'
 
 function Like(props) {
@@ -38,8 +38,11 @@ function Like(props) {
                             setLikes(Likes + 1)
                             setLikeAction('liked')
                         } else {
-                            alert('좋아요 반영에 실패했습니다.')
+                            message.warning('좋아요 반영에 실패했습니다.')
                         }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
             } else {
                 Axios.delete('/api/like/', {params: variable})
@@ -48,8 +51,11 @@ function Like(props) {
                             setLikes(Likes - 1)
                             setLikeAction(null)
                         } else {
-                            alert('좋아요 취소 반영에 실패했습니다.')
+                            message.warning('좋아요 취소 반영에 실패했습니다.')
                         }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
             }
         }

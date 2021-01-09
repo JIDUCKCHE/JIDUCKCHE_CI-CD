@@ -39,8 +39,11 @@ function UploadPage(props) {
                         setArtist(response.data.result);
                         setCategory(response.data.result[0]);
                     } else {
-                        alert('아티스트 정보를 가져오는데 실패했습니다.')
+                        message.warning('아티스트 정보를 가져오는데 실패했습니다.')
                     }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         }, [])
 
@@ -59,26 +62,38 @@ function UploadPage(props) {
 
                 let image = await Axios.post('/api/prod/getUrl', {name: uuid + originFilename})
                     .then(response => {
-                            return (response.data.result)
+                        if (response.data.success) return (response.data.result)
+                        else message.warning('이미지 업로드에 실패했습니다.')
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
                 Axios.put(image.postURL, OriginFile)
                     .then(response => {
-                        console.log(response)
                         if(response.status !== 200) {
-                            alert('이미지 업로드에 실패했습니다.')
+                            message.warning('이미지 업로드에 실패했습니다.')
                         }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
                 let preImage = await Axios.post('/api/prod/getPreUrl', {name: uuid + preFilename})
                     .then(response => {
-                            return (response.data.result)
+                        if (response.data.success) return (response.data.result)
+                        else message.warning('이미지 업로드에 실패했습니다.')
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
 
                 Axios.put(preImage.postURL, newCroppedFile)
                     .then(response => {
-                        console.log(response)
                         if(response.status !== 200) {
-                            alert('이미지 업로드에 실패했습니다.')
+                            message.warning('이미지 업로드에 실패했습니다.')
                         }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
                     
                 const variable = {
@@ -101,8 +116,11 @@ function UploadPage(props) {
                             message.success('성공적으로 업로드를 완료했습니다.')
                             props.history.push('/')
                         } else {
-                            alert('데이터 저장에 실패했습니다.')
+                            message.warning('데이터 저장에 실패했습니다.')
                         }
+                    })
+                    .catch(error => {
+                        console.log(error)
                     })
                 }
         }

@@ -9,7 +9,8 @@ var appDir = path.dirname(require.main.filename);
 const { User } = require('../models/User');
 
 async function createUser(save) {
-    return await create_dao.saveObject(save, User)
+    result = await create_dao.saveObject(save, User)
+    return ({ success: true, data: result })
 }
 
 async function checkDuplication(id, email) {
@@ -19,9 +20,8 @@ async function checkDuplication(id, email) {
 
     try {
         const result = await read_dao.findList(variable, User)
-        console.log(result)
-        if (result.length > 0) return ('false')
-        if (result.length == 0) return ('success')
+        if (result.length > 0) return ({ success: false, data: 'duplicated' })
+        if (result.length == 0) return ({ success: true, data: 'not duplicated' })
     } catch (error) {
         throw error
     }
@@ -34,8 +34,8 @@ async function createAuthCode(userId) {
         const authNum = Math.random().toString().substr(2,6);
         let emailTemplete;
         ejs.renderFile(appDir+'/template/authMail.ejs', {authCode : authNum}, function (err, data) {
-        if(err) throw err
-        emailTemplete = data;
+            if(err) throw err
+            emailTemplete = data;
         });
         const transporter = config.transporter
         await transporter.sendMail({
@@ -47,6 +47,7 @@ async function createAuthCode(userId) {
         transporter.close()
         const update = { authCode: authNum }
         await update_dao.findAndUpate(variable, update, User)
+        return ({ success: true, data: 'create&send auth code success' })
     } catch (error) {
         throw error
     }
@@ -54,7 +55,8 @@ async function createAuthCode(userId) {
 
 async function readUserInfo(userId) {
     const variable = { _id: userId }
-    return await read_dao.findOne(variable, User)
+    result = await read_dao.findOne(variable, User)
+    return ({ success: true, data: result })
 }
 
 async function emailAuth(userId, authCode) {
@@ -65,10 +67,9 @@ async function emailAuth(userId, authCode) {
         if (user.authCode == authCode) {
             const update = { level: 2 }
             await update_dao.findAndUpate(variable, update, User)
-            return { auth: true }
-        } else {
-            return { auth: false }
+            return ({ success: true, data: 'auth success' })
         }
+        return ({ success: false, data: 'auth failed' })
     } catch (error) {
         throw error
     }
@@ -77,7 +78,8 @@ async function emailAuth(userId, authCode) {
 async function setAdmin(userId) {
     const variable = { _id: userId }
     const update = { isAdmin: true }
-    return await update_dao.findAndUpate(variable, update, User)
+    result = await update_dao.findAndUpate(variable, update, User)
+    return ({ success: true, data: result })
 }
 
 async function doLogin(req) {
@@ -85,9 +87,11 @@ async function doLogin(req) {
 
     try {
         result = await read_dao.findOne(variable, User)
-        if(!result) throw new Error("Auth failed, email not found")
-        await result.comparePassword(req.body.password)
-        return await result.generateToken(result)
+        if(!result) return ({ success: false, data: 'Email not found' })
+        isMatch = await result.comparePassword(req.body.password)
+        if(!isMatch) return ({ success: false, data: 'Password not corrected' })
+        result = await result.generateToken(result)
+        return ({ success: true, data: result })
     } catch(error) {
         console.log(error)
         throw error
@@ -98,7 +102,8 @@ async function doLogout(userId) {
     const variable = { _id: userId }
     const update = { token: "" }
 
-    return await update_dao.findAndUpate(variable, update, User)
+    result = await update_dao.findAndUpate(variable, update, User)
+    return ({ success: true, data: result })
 }
 
 module.exports = {

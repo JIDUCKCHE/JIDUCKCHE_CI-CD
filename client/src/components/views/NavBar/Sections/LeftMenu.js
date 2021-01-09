@@ -7,25 +7,6 @@ const SubMenu = Menu.SubMenu
 function LeftMenu(props) {
     
     const user = useSelector(state => state.user)
-    const userId = localStorage.getItem('userId')
-    const [User, setUser] = useState(null)
-
-        // useEffect(() => {
-        //     if (userId){
-        //     Axios.get(`/api/user/info/${userId}`)
-        //         .then(response => {
-        //             if(response.data.success) {
-        //                 console.log(response.data.result)
-        //                 setUser(response.data.result)
-        //             } else {
-        //                 alert('사용자 정보를 가져오는데 실패했습니다.')
-        //             }
-        //         })
-        //     } else {
-        //         setUser(null)
-        //     }
-        // }, [])
-
 
         const MenuLogin = () => {
             return (

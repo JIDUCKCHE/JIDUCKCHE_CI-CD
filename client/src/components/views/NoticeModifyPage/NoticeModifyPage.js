@@ -27,8 +27,11 @@ function NoticeModifyPage(props) {
                     setStartDate(new Date(response.data.result.startDate))
                     setEndDate(new Date(response.data.result.endDate))
                 } else {
-                    alert('공지사항 정보를 가져오는데 실패했습니다.')
+                    message.warning('공지사항 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 

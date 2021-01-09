@@ -58,21 +58,13 @@ userSchema.pre('save', function (next) {
     }
 })
 
-userSchema.methods.comparePassword = function (plainPassword) {
-    let isMatch = null
-    let err = null
+userSchema.methods.comparePassword = async function (plainPassword) {
     try{
         isMatch = bcrypt.compareSync(plainPassword, this.password)
+        return isMatch
     } catch(error) {
-        err = error
+        throw error
     }
-
-    return new Promise((resolve, reject) => {
-        if(isMatch) resolve(isMatch)
-        if(err) reject(err)
-        console.log(err)
-        reject(new Error("Wrong Password"))
-    })
 }
 
 userSchema.methods.generateToken = function(user) {

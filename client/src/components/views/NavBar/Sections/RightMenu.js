@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Menu } from 'antd'
+import { Menu, message } from 'antd'
 import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Axios from 'axios'
@@ -18,8 +18,11 @@ function RightMenu(props) {
                 if(response.data.success) {
                     setEnts(response.data.result)
                 } else {
-                    alert('엔터 정보를 가져오는데 실패했습니다.')
+                    message.warning('엔터 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
 
         Axios.get('/api/artist/')
@@ -27,8 +30,11 @@ function RightMenu(props) {
                 if(response.data.success) {
                     setArtists(response.data.result)
                 } else {
-                    alert('아티스트 정보를 가져오는데 실패했습니다.')
+                    message.warning('아티스트 정보를 가져오는데 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 
@@ -40,14 +46,38 @@ function RightMenu(props) {
                     localStorage.removeItem('userId')
                     props.history.push("/login")
                 } else {
-                    alert('로그아웃에 실패했습니다.')
+                    message.error('로그아웃에 실패했습니다.')
                 }
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
     
     if(user.userData && !user.userData.isAuth) {
         return (
             <Menu mode={props.mode}>
+                <SubMenu key="artist" title="아티스트" style={{ fontWeight: 'bold' }}>
+                    {Ents && Artists &&
+                        Ents.map((ent, index) => (
+                            <SubMenu key={index} title={ent.name}>
+                                {
+                                    Artists.map((artist, aindex) => {
+                                        if (artist.entId === ent._id) {
+                                            return (
+                                            <Menu.Item key={`artsit${aindex}`}>
+                                                <a href={`/artist/${artist._id}`}>
+                                                    {artist.name}
+                                                </a>
+                                            </Menu.Item>
+                                            )
+                                        }
+                                    })
+                                }
+                            </SubMenu>
+                        ))    
+                    }
+                </SubMenu>
                 <Menu.Item key="mail">
                     <a href="/login" style={{ fontWeight: 'bold' }}>로그인</a>
                 </Menu.Item>

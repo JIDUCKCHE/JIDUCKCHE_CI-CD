@@ -11,7 +11,8 @@ async function createLike(userId, prodId, commentId) {
     let variable = { }
     if (prodId) variable = { prodId: prodId, userId: userId }
     if (commentId) variable = { prodId: prodId, commentId: commentId, userId: userId }
-    return await create_dao.saveObject(variable, Like)
+    result = await create_dao.saveObject(variable, Like)
+    return ({ success: true, data: result })
 }
 
 
@@ -24,7 +25,8 @@ async function readLikes(prodId, commentId) {
     if (commentId) {
         pipeline = [{ $match: { commentId: ObjectId(commentId) } }]
     }
-    return await read_dao.findWithAggregate(pipeline, Like)
+    result = await read_dao.findWithAggregate(pipeline, Like)
+    return ({ success: true, data: result })
 }
 
 
@@ -33,8 +35,8 @@ async function deleteLike(userId, prodId, commentId) {
     let variable = { }
     if (prodId) variable = { prodId: prodId, userId: userId }
     if (commentId) variable = { commentId: commentId, userId: userId }
-    return await delete_dao.findOneAndDelete(variable, Like)
-
+    result = await delete_dao.findOneAndDelete(variable, Like)
+    return ({ success: true, data: result })
 }
 
 module.exports = {
