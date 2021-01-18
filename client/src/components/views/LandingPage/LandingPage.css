@@ -1,0 +1,172 @@
+.main_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.prod_main_container {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 1rem 0 2rem 0;
+}
+
+.title_container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.title {
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.more_button {
+    color: grey;
+    font-size: 12px;
+}
+
+.dividing_line {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 0.5px;
+}
+
+.main_image {
+    width: 100%;
+    height: 30vh;
+}
+
+.main_image_container {
+    width: 100%;
+    height: 100%;
+}
+
+.main_image_background {
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 30%,
+        rgba(0,0,0,0) 50%,
+        rgba(0,0,0,0.65) 100%),
+        #1c1c1c;
+    width: 100%;
+    height: 30vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: -1;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_image_bg_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_image_bg_image img{
+    z-index: -2;
+    position: absolute;
+    width: 100%;
+    filter: brightness(50%);
+}
+
+.main_image_main_image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    backdrop-filter: blur(15px);
+
+}
+
+.main_image_main_image img {
+    max-width: 100%;
+    height: 100%;
+}
+
+.main_image_title {
+    position: relative;
+    width: 30%;
+    height: 30%;
+    top: 60%;
+    left: 2%;
+    z-index: 2;
+}
+
+.main_image_title text {
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.main_image_title p {
+    color: white;
+    font-size: 15px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    height: 20px
+}
+
+.main_image_bar {
+    width: 20%;
+    height: 2px;
+    background-color: grey;
+    position: absolute;
+    top: 90%;
+    left: 2%;
+    z-index: 2;
+}
+
+.main_image_bar div {
+    background-color: white;
+    height: 100%;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    .main_image_title {
+        width: 90%;
+        top: 70%;
+        left: 5%;
+    }
+
+    .main_image_title text {
+        font-size: 22px;
+    }
+
+    .main_image_title p {
+        font-size: 12px;
+    }
+
+    .main_image_main_image img {
+        max-width: 100%;
+        height: 70%;
+    }
+    
+    .main_image_bar {
+        width: 50%;
+        top: 95%;
+        left: 5%;
+    }
+}
