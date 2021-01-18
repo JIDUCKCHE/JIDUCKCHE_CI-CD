@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Axios from 'axios';
 import GridCard from '../commons/GridCard';
 import { message } from 'antd';
+import './ArtistDetailPage.css'
 
 function ArtistDetailPage(props) {
 
@@ -37,10 +38,10 @@ function ArtistDetailPage(props) {
     }, [])
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ width: '100%', height: '450px', display: 'flex', flexDirection: 'column', justifyContent: 'center', backgroundColor: 'grey', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
-                <img style={{ maxHeight: '300px', maxWidth: '700px', marginBottom: '3rem' }} src={Artist.mainImagePath} alt="아티스트 이미지"/>
-                <text style={{ position: 'absolute', marginTop: '10rem', fontSize: '30px', fontWeight: '250', color: 'white' }}>{Artist.name}</text>
+        <div className="artist_detail_main_container">
+            <div className="artist_detail_logo">
+                <img src={Artist.mainImagePath} alt="아티스트 이미지"/>
+                <text>{Artist.name}</text>
             </div>
             {Prods && Prods.map((prod, index) => (
                 <GridCard

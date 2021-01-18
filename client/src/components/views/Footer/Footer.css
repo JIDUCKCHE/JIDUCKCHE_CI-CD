@@ -44,7 +44,7 @@
     font-size: 10px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1029px) {
     .footer {
         height: 25vh;
     }
