@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { message } from 'antd'
 import { useSelector } from 'react-redux'
 import Comment from '../commons/Comment'
+import './NoticeDetailPage.css'
 
 function NoticeDetailPage(props) {
 
@@ -68,27 +69,23 @@ function NoticeDetailPage(props) {
     }
 
     return (
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '2rem', textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                <h1>공지사항</h1>
-                <div style={{ width: '80%', borderRadius: '1rem', backgroundColor: 'gray', height: '1000px', display: 'flex', justifyContent: 'start', flexDirection: 'column', alignItems:'center' }}>
-                    <text style={{ fontSize: '40px', fontWeight: '1000', color: 'white', marginTop: '1rem' }}> {Notice.title} </text>
-                    <div style={{ marginTop: '3rem', width: '80%', textAlign: 'left' }}>
-                        <text style={{ whiteSpace: 'pre-line', color: 'white', fontSize: '18px', fontWeight: '500' }}>{Notice.content}</text>
-                    </div>
-
-                    {user && user.userData.isAdmin &&
-                    <div>
-                        <button onClick={onModifyClick}>수정하기</button>
-                        <button onClick={onDeleteClick}>삭제하기</button>
-                    </div>
-                    }
+        <div className="notice_detail_main_container">
+            <h1>공지사항</h1>
+            <div className="notice_detail_background">
+                <text id="title"> {Notice.title} </text>
+                <div className="notice_detail_content">
+                    <text>{Notice.content}</text>
                 </div>
-                <div style={{ width: '100%', padding: '3rem 4rem', textAlign: 'left' }}>
-                    <Comment refreshFunction={refreshFunction} commentLists={Comments} noticeId={noticeId} number={Comments.length}/>
+                {user && user.userData.isAdmin &&
+                <div>
+                    <button onClick={onModifyClick}>수정하기</button>
+                    <button onClick={onDeleteClick}>삭제하기</button>
                 </div>
+                }
             </div>
-            
+            <div className="notice_detail_comment">
+                <Comment refreshFunction={refreshFunction} commentLists={Comments} noticeId={noticeId} number={Comments.length}/>
+            </div>
         </div>
     )
 }

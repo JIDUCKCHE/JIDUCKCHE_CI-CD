@@ -3,6 +3,7 @@ import Axios from 'axios'
 import GridCard from '../commons/GridCard'
 import { withRouter } from 'react-router-dom'
 import { message } from 'antd'
+import './RankingPage.css'
 
 function RankingPage() {
     
@@ -41,8 +42,8 @@ function RankingPage() {
     }, [])
     
     return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ width: '85%', margin: '1rem auto' }}>
+        <div className="ranking_main_container">
+            <div className="ranking_title">
                 <h2> 인기 굿즈 순위 </h2>
                 <hr />
             </div>

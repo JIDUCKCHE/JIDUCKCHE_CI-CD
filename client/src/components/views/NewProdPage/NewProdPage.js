@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Axios from 'axios'
 import GridCard from '../commons/GridCard'
 import { message } from 'antd'
+import './NewProdPage.css'
 
 function NewProdPage() {
     
@@ -55,8 +56,8 @@ function NewProdPage() {
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ width: '85%', margin: '1rem auto' }}>
+        <div className="new_prod_main_container">
+            <div className="new_prod_title">
                 <h2> 최신 굿즈들 </h2>
                 <hr />
             </div>

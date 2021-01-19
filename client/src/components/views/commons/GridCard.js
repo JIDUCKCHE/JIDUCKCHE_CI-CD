@@ -3,6 +3,7 @@ import { Tooltip } from 'antd'
 import Like from './Like'
 import { CommentOutlined } from '@ant-design/icons'
 import { withRouter } from 'react-router-dom'
+import './common.css'
 
 function GridCard(props) {
     const prod = props.prod
@@ -18,33 +19,33 @@ function GridCard(props) {
     }
 
     return (
-        <div key={index} style={{ width: '100%', height: '300px', display: 'flex', justifyContent: 'center',marginTop: '0.5rem', alignItems:'center' }}>
-            <div style={{ width: '70%', height: '300px', display: 'flex', justifyContent: 'center',marginTop: '1rem', alignItems:'center', backgroundColor: 'whitesmoke', borderRadius: '1rem' }} onClick={onClickHandler}>
-                <div style={{width: '85%', height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div key={index} className="grid_card_main_container">
+            <div className="grid_card_background" onClick={onClickHandler}>
+                <div className="grid_card_sub_container">
                 {rank !== null &&
-                    <div style={{ marginRight: '2rem' }}>
+                    <div className="grid_card_ranking">
                         <h2>{rank}</h2>
                     </div>
                 }
-                    <div style={{ width: '270px', height: '270px', margin: 0 }}>
-                        <img style={{ height: '270px', objectFit: 'cover' }} src={`${prod.preImagePath}`} alt={prod.name}/>
+                    <div className="grid_card_img">
+                        <img src={`${prod.preImagePath}`} alt={prod.name}/>
                     </div>
-                    <div style={{ display: 'flex', width: '700px', height: '90%', marginLeft: '48px', flexDirection:'column', justifyContent: 'center', textAlign: 'right', alignItems:'flex-end'}}>
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div className="grid_card_title">
+                        <div className="grid_card_title_text">
                             <h1>{prod.name}</h1>
-                            <text style={{ color: 'black'}}>{prod.content}</text>
-                            <text style={{ color: 'grey'}}>{user.name}</text>
+                            <text id="black">{prod.content}</text>
+                            <text id="grey">{user.name}</text>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: '1rem' }}>
+                        <div className="grid_card_title_action">
                             <Like 
                                 prodId={prod._id}
                                 userId={user._id}
                             />
-                            <span key="comment" style={{ marginLeft: '1rem' }}>
+                            <span key="comment" id="comment">
                                 <Tooltip title="comment">
                                     <CommentOutlined />
                                 </Tooltip>
-                                <span style={{ paddingLeft: '8px', cursor: 'auto' }}> {props.comment} </span>
+                                <span id="comment_number"> {props.comment} </span>
                             </span>
                         </div>
                     </div>

@@ -1,23 +1,24 @@
 import React from 'react'
+import '../NoticePage.css'
 
 function NoticeGrid(props) {
     console.log(props)
     return (
-        <div style={{ display: 'inline-block', width: '100%' }}>
-                <div style={{ width: '100%', height: '50px', display: 'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center' }}>
-                    <div style={{ width: '10% '}}>
-                        <text>{props.index}</text>
-                    </div>
-                    <a href={`/notice/${props.notice._id}`}>
-                        <div style={{ width: '100% ', textAlign: 'left'}}>
-                            <text>{props.notice.title}</text>
-                        </div>
-                    </a>
-                    <div style={{ width: '20% '}}>
-                        <text>{props.notice.userId.name}</text>
-                    </div>
+        <div>
+            <div className="notice_grid_main_container">
+                <div className="notice_grid_index">
+                    <text>{props.index}</text>
                 </div>
-            <hr/>
+                <a href={`/notice/${props.notice._id}`} className="notice_grid_title">
+                    <div className="notice_grid_title_sub">
+                        <text>{props.notice.title}</text>
+                    </div>
+                </a>
+                <div className="notice_grid_user">
+                    <text>{props.notice.userId.name}</text>
+                </div>
+            </div>
+            <div className="notice_grid_line"/>
         </div>
         )
 }

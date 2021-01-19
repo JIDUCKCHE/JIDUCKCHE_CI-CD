@@ -65,7 +65,7 @@
 .prod_detail_title_title text {
     font-weight: 800;
     color: black;
-    font-size: 40px;
+    font-size: 3vw;
 }
 
 .prod_detail_title_user {
@@ -137,9 +137,31 @@
     display: flex;
     margin-top: 5rem;
     flex-direction: column;
+    align-items: center;
+}
+
+.prod_detail_main_image img {
+    max-width: 90%;
+    height: auto;
 }
 
 .prod_detail_comment {
     width: 100%;
     padding: 3rem 4rem;
+}
+
+@media (max-width: 767px) {
+    .prod_detail_title_title text {
+        font-size: 5vw;
+    }
+    
+    .prod_detail_banner_container {
+        width: 90%;
+        height: 30vw;
+        min-height: 250px;
+    }
+
+    .prod_detail_banner_img img {
+        min-width: 85%;
+    }
 }
