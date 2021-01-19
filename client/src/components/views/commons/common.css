@@ -11,6 +11,7 @@
     width: 70%;
     height: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background-color: whitesmoke;
@@ -27,12 +28,37 @@
 }
 
 .grid_card_ranking {
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    left: -5%;
+    left: -1%;
+}
+
+.grid_card_ranking span {
+    position: absolute;
+    width: 3vw;
+    height: 3vw;
+    background-color: #FFB641;
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid_card_ranking text {
+    color: white;
+    font-size: 2vw;
+    font-weight: 300;
 }
 
 .grid_card_img {
     width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid_card_img img {
@@ -96,24 +122,54 @@
 
 @media (max-width: 767px) {
     .grid_card_main_container {
-        height: 40vw;
+        height: 120vw;
         margin: 0.5rem 0;
     }
 
     .grid_card_background {
         width: 90%;
+        flex-direction: column;
+    }
+
+    .grid_card_sub_container {
+        flex-direction: column;
+    }
+
+    .grid_card_ranking {
+        width: 12vw;
+        height: 12vw;
+        left: 0;
+        top: -2%;
+    }
+
+    .grid_card_ranking span {
+        width: 8vw;
+        height: 8vw;
+    }
+
+    .grid_card_ranking text {
+        font-size: 4vw;
     }
 
     .grid_card_img {
-        width: 40%;
+        width: 70%;
+        margin-bottom: 1rem;
     }
 
     .grid_card_title {
-        width: 50%;
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        margin-left: 0;
     }
 
     .grid_card_title_text h1 {
-        font-size: 3vw;
+        font-size: 6vw;
         font-weight: bold;
+    }
+
+    .grid_card_title_text text {
+        font-size: 3vw;
+        margin-bottom: 0.5rem;
     }
 }

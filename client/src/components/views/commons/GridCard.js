@@ -21,12 +21,14 @@ function GridCard(props) {
     return (
         <div key={index} className="grid_card_main_container">
             <div className="grid_card_background" onClick={onClickHandler}>
-                <div className="grid_card_sub_container">
                 {rank !== null &&
-                    <div className="grid_card_ranking">
-                        <h2>{rank}</h2>
-                    </div>
+                <div className="grid_card_ranking">
+                    <span>
+                        <text>{rank}</text>
+                    </span>
+                </div>
                 }
+                <div className="grid_card_sub_container">
                     <div className="grid_card_img">
                         <img src={`${prod.preImagePath}`} alt={prod.name}/>
                     </div>
