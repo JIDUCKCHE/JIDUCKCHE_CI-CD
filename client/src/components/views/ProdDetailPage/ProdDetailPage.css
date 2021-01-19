@@ -157,11 +157,29 @@
     
     .prod_detail_banner_container {
         width: 90%;
-        height: 30vw;
-        min-height: 250px;
+        height: auto;
+        min-height: 0;
+        max-height: 500px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .prod_detail_banner_img {
+        width: 60%;
+        margin: 1rem 0;
+    }
+
+    .prod_detail_banner_title {
+        width: 70%;
+        align-items: flex-start;
     }
 
     .prod_detail_banner_img img {
-        min-width: 85%;
+        min-width: 100%;
+    }
+
+    .prod_detail_banner_title text {
+        font-size: 3vw;
+        text-align: left;
     }
 }
