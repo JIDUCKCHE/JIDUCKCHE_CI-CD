@@ -4,7 +4,7 @@
     align-items: center;
     margin: 1rem 0;
     width: 100%;
-    height: 20vw;
+    height: auto;
 }
 
 .grid_card_background {
@@ -25,6 +25,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 1rem 0;
 }
 
 .grid_card_ranking {
@@ -33,7 +34,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin-right: 1rem; */
 }
 
 .grid_card_ranking span {
@@ -121,7 +121,6 @@
 
 @media (max-width: 767px) {
     .grid_card_main_container {
-        height: 120vw;
         margin: 0.5rem 0;
     }
 
@@ -137,11 +136,10 @@
     .grid_card_ranking {
         width: 12vw;
         height: 12vw;
-        margin-right: 0;
-        margin-bottom: vw;
     }
 
     .grid_card_ranking span {
+        margin-top: 1rem;
         width: 8vw;
         height: 8vw;
     }
