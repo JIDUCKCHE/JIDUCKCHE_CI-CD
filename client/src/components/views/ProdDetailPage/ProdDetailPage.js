@@ -125,7 +125,7 @@ function ProdDetailPage(props) {
                     <img src={`${Prod.preImagePath}`} alt="prodPreImage"/>
                 </div>
                 <div className="prod_detail_banner_title">
-                    <label>상품설명</label>
+                    <text id="label">상품설명</text>
                     <text> {Prod.content} </text>
                     <a href={Prod.link}>사러가기</a>
                     {DDay >= 0 ?
