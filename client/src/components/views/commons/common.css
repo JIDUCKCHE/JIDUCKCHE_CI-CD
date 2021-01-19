@@ -33,12 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    left: -1%;
+    /* margin-right: 1rem; */
 }
 
 .grid_card_ranking span {
-    position: absolute;
+    position: relative;
     width: 3vw;
     height: 3vw;
     background-color: #FFB641;
@@ -75,7 +74,7 @@
     justify-content: center;
     text-align: right;
     align-items: flex-end;
-    margin-left: 5vw;
+    margin-left: 2vw;
 }
 
 .grid_card_title_text {
@@ -138,8 +137,8 @@
     .grid_card_ranking {
         width: 12vw;
         height: 12vw;
-        left: 0;
-        top: -2%;
+        margin-right: 0;
+        margin-bottom: vw;
     }
 
     .grid_card_ranking span {
