@@ -184,7 +184,7 @@
     }
 
     .prod_detail_banner_title #label {
-        font-size: 2.7vw;
+        font-size: 2.5vw;
     }
 
     .prod_detail_banner_title text {
@@ -192,7 +192,11 @@
         text-align: left;
     }
 
-    .prod_detail_banner_title a h2{
-        font-size: 2.7vw;
+    .prod_detail_banner_title a {
+        font-size: 2.5vw;
+    }
+
+    .prod_detail_banner_title h2 {
+        font-size: 2.5vw;
     }
 }
