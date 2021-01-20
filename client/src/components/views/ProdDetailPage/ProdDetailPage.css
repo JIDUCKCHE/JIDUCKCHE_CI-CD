@@ -111,31 +111,33 @@
 }
 
 .prod_detail_banner_title label {
-    font-size: 2vw;
+    font-size: 1vw;
 }
 
 .prod_detail_banner_title text {
     margin-top: 1rem;
-    font-weight: 300;
-    font-size: 2.5vw;
+    font-weight: 200;
+    font-size: 1.5vw;
     color: black;
     text-align: right;
 }
 
 .prod_detail_banner_title #label {
     font-weight: 500;
-    font-size: 2vw;
+    font-size: 1.3vw;
 }
 
 .prod_detail_banner_title a {
-    font-size: 2vw;
-    color: #FFB641;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    font-size: 1.3vw;
+    background-color: #FFB641;
+    color: white;
+    border-radius: 10px;
+    padding: 0.3rem;
+    margin: 1rem 0;
 }
 
 .prod_detail_banner_title h2 {
-    font-size: 2vw;
+    font-size: 1.5vw;
 }
 
 .prod_detail_main_image {
@@ -157,7 +159,7 @@
 
 @media (max-width: 767px) {
     .prod_detail_title_title text {
-        font-size: 5vw;
+        font-size: 6vw;
     }
     
     .prod_detail_banner_container {
@@ -171,7 +173,7 @@
 
     .prod_detail_banner_img {
         width: 60%;
-        margin: 1rem 0;
+        margin-top: 1rem;
     }
 
     .prod_detail_banner_title {
@@ -184,19 +186,20 @@
     }
 
     .prod_detail_banner_title #label {
-        font-size: 2.5vw;
+        font-size: 3vw;
     }
 
     .prod_detail_banner_title text {
-        font-size: 3vw;
+        font-size: 4vw;
         text-align: left;
     }
 
     .prod_detail_banner_title a {
-        font-size: 2.5vw;
+        font-size: 3vw;
+        margin: 0.7rem 0;
     }
 
     .prod_detail_banner_title h2 {
-        font-size: 2.5vw;
+        font-size: 4vw;
     }
 }
