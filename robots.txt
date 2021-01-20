@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /login
+Disallow: /authEmail
+Disallow: /register
+Disallow: /upload
+Disallow: /myPage
+Disallow: /uploadEnt
+Disallow: /uploadArtist
+Disallow: /modify/*
+Disallow: /notice/modify/*
+Disallow: /uploadNotice
+
+Sitemap: https://community.jiduckche.com/sitemap.xml
