@@ -111,31 +111,31 @@
 }
 
 .prod_detail_banner_title label {
-    font-size: 1vw;
+    font-size: 2vw;
 }
 
 .prod_detail_banner_title text {
     margin-top: 1rem;
-    font-weight: 200;
-    font-size: 1.5vw;
+    font-weight: 300;
+    font-size: 2.5vw;
     color: black;
     text-align: right;
 }
 
 .prod_detail_banner_title #label {
     font-weight: 500;
-    font-size: 1.3vw;
+    font-size: 2vw;
 }
 
 .prod_detail_banner_title a {
-    font-size: 1.3vw;
+    font-size: 2vw;
     color: #FFB641;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
 .prod_detail_banner_title h2 {
-    font-size: 1.5vw;
+    font-size: 2vw;
 }
 
 .prod_detail_main_image {

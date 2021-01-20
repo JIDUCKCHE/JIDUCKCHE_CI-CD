@@ -44,7 +44,7 @@ function RegisterPage(props) {
 
         Axios.get(`api/user/dup`, { params: params })
             .then(response => {
-                if (response.data.result == 'success') {
+                if (response.data.success) {
                     if (type == 'id') setNameDup(false)
                     if (type == 'email') setEmailDup(false)
                 } else {

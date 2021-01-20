@@ -161,12 +161,12 @@
     }
 
     .grid_card_title_text h1 {
-        font-size: 6vw;
+        font-size: 8vw;
         font-weight: bold;
     }
 
     .grid_card_title_text text {
-        font-size: 3vw;
+        font-size: 4vw;
         margin-bottom: 0.5rem;
     }
 }

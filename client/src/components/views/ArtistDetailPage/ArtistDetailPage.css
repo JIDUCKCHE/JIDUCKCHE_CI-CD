@@ -7,31 +7,32 @@
 
 .artist_detail_logo {
     width: 100%;
-    height: 25vw;
-    min-height: 30vh;
-    max-height: 50vh;
+    height: auto;
+    max-height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: grey;
+    position: relative;
 }
 
 .artist_detail_logo img {
-    max-height: 67%;
+    max-height: 20vh;
     max-width: 50%;
+    margin: 5rem 0;
 }
 
 .artist_detail_logo text {
-    position: relative;
-    top: 15%;
     font-size: 2vw;
     font-weight: 500;
     color: white;
+    position: absolute;
+    top: 85%;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
     .artist_detail_logo {
         height: 20vw;
     }
-}
+} */
