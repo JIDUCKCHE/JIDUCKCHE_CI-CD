@@ -49,12 +49,14 @@ function MainImage(props) {
                         <div className="main_image_main_image">
                             <img src={banner._id.preImagePath}/>
                         </div>
-                        <div className="main_image_title">
-                            <text> {banner._id.name} </text>
-                            <p>{banner._id.content}</p>
-                        </div>
-                        <div className="main_image_bar">
-                            <div style={{ width : `${100*((Page+1)/Banner.length)}%`}} />
+                        <div className="main_image_content">
+                            <div className="main_image_title">
+                                <text> {banner._id.name} </text>
+                                <p>{banner._id.content}</p>
+                            </div>
+                            <div className="main_image_bar">
+                                <div style={{ width : `${100*((Page+1)/Banner.length)}%`}} />
+                            </div>
                         </div>
                     </div>
                 </a>

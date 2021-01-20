@@ -46,7 +46,7 @@
 
 @media (max-width: 1029px) {
     .footer {
-        height: 25vh;
+        height: auto;
     }
 
     .first_row {
