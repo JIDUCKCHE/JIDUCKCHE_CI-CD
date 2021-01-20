@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { Icon } from 'antd'
-
+import './UploadPage.css'
 
 import {
     extractImageFileExtensionFromBase64,
@@ -96,9 +96,9 @@ function DropAndCrop(props) {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="drop_and_crop_main_container">
            {ImageSrc !== null ?
-            <div style={{ width: '300px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="drop_and_crop_crop">
                 <ReactCrop
                     src={ImageSrc}
                     crop={Crop}
@@ -113,17 +113,17 @@ function DropAndCrop(props) {
                 maxSize={imageMaxSize}
                 accept={acceptedFileTypes}>
                 {({ getRootProps, getInputProps }) => (
-                    <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }} {...getRootProps()}>
+                    <div className="drop_and_crop_drop" {...getRootProps()}>
                         <input {...getInputProps()} />
                         <Icon type="plus" style={{ fontSize: '3rem' }}/>
                     </div>
                 )}
             </Dropzone>}   
             {
-                <div style={{ marginLeft: '3rem', width: '300px'}}>
-                    <p>Preview Canvas Crop</p>
+                <div className="drop_and_crop_canvas">
+                    <p>미리보기</p>
                     <canvas ref={imagePreviewCanvasRef}/>
-                    <button onClick={handleClearToDefault}>Clear</button>
+                    <button onClick={handleClearToDefault}>초기화</button>
                 </div>
             } 
         </div>

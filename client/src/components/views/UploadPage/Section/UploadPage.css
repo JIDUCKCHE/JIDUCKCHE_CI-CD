@@ -1,0 +1,175 @@
+.upload_prod_main_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+}
+
+.upload_prod_title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.upload_prod_form {
+    width: 50%;
+}
+
+.upload_prod_form text {
+    font-size: 16px;
+    margin-left: 0.2rem;
+}
+
+.upload_prod_drop_crop {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload_prod_title {
+    text-align: left;
+}
+
+.upload_prod_title Input {
+    margin-top: 0.5rem;
+}
+
+.upload_prod_content {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.upload_prod_content textarea{
+    margin-top: 0.5rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 20vh;
+}
+
+.upload_prod_calendar {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+}
+
+.upload_prod_calendar_sub {
+    margin: auto;
+}
+
+.upload_prod_link {
+    margin: 1rem 0;
+}
+
+.upload_prod_select {
+    margin-bottom: 1rem;
+}
+
+.upload_prod_select select{
+    width: 150px;
+    height: 2rem;
+    border: 1px solid rgba(0,0,0,0.3);
+    outline: 0;
+    border-radius: 5px;
+    padding-left: 0.5rem;
+}
+
+.upload_prod_button {
+    width: 70px;
+    height: 40px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    background-color: #FFB641
+}
+
+@media (max-width: 1420px) {
+    .upload_prod_calendar {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .upload_prod_calendar_sub {
+        margin: 0 0 1rem 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .upload_prod_form {
+        width: 80%;
+    }
+
+    .upload_prod_calendar_sub {
+        width: 90%;
+    }
+}
+
+.drop_and_crop_main_container {
+    display: flex;
+    justify-content: center;
+}
+
+.drop_and_crop_crop {
+    width: 50%;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop_and_crop_drop {
+    width: 50%;
+    height: auto;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop_and_crop_canvas {
+    margin-left: 3rem;
+    width: 40%;
+}
+
+.drop_and_crop_canvas canvas {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.drop_and_crop_canvas button {
+    height: 30px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #FFB641;
+    color: white;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .drop_and_crop_main_container {
+        flex-direction: column;
+    }
+
+    .drop_and_crop_crop {
+        width: 100%;
+        height: auto;
+    }
+
+    .drop_and_crop_drop {
+        width: 100%;
+        height: 30vh;
+    }
+
+    .drop_and_crop_canvas {
+        margin-left: 0;
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+}

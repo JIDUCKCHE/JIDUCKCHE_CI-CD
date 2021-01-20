@@ -10,6 +10,7 @@ import {
 import { v4 } from 'uuid'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
+import './Section/UploadPage.css'
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -171,79 +172,68 @@ function UploadPage(props) {
         }
 
     return (
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div className="upload_prod_main_container">
+            <div className="upload_prod_title">
                 <Title level={2}> Prod Upload </Title>
             </div>
+            <div className="upload_prod_form">
             <Form onSubmit={onSubmit}>
-                <DropAndCrop
-                    OriginFile={OriginFile} setOriginFile={refreshOriginFile}
-                    ImageSrc={ImageSrc} setImageSrc={refreshImageSrc}
-                    setImageExt={refreshImageExt}
-                    canvas={imagePreviewCanvasRef}/>
-                <br />
-                <br />
-
-
-                <label>상품 이름</label>
-                <Input
-                    onChange={onNameChange}
-                    value={ProdName}
-                />
-                <br />
-                <br />
-
-
-                <label>내용</label>
-                <TextArea
-                    onChange={onContentChange}
-                    value={Content}
-                />
-                <br />
-                <br />
-
-
-                <div style={{ display: 'flex', justifyContent:'space-between' }}>
-                    <div style={{ marginLeft: '1rem', width: '45%' }}>
-                        <label>펀딩 시작일</label>
+                <div className="upload_prod_drop_crop">
+                    <DropAndCrop
+                        OriginFile={OriginFile} setOriginFile={refreshOriginFile}
+                        ImageSrc={ImageSrc} setImageSrc={refreshImageSrc}
+                        setImageExt={refreshImageExt}
+                        canvas={imagePreviewCanvasRef}/>
+                </div>
+                <div className="upload_prod_title">
+                    <text>상품 이름</text>
+                    <Input
+                        onChange={onNameChange}
+                        value={ProdName}
+                    />
+                </div>
+                <div className="upload_prod_content">
+                    <text>내용</text>
+                    <textarea
+                        onChange={onContentChange}
+                        value={Content}
+                    />
+                </div>
+                <div className="upload_prod_calendar">
+                    <div className="upload_prod_calendar_sub">
+                        <text>펀딩 시작일</text>
                         <Calendar
                             onChange={onStartDateChange}
                             value={StartDate}
                         />
                     </div>
-                    <div style={{ marginRight: '1rem', width: '45%' }}>
-                        <label>펀딩 종료일</label>
+                    <div className="upload_prod_calendar_sub">
+                        <text>펀딩 종료일</text>
                         <Calendar
                             onChange={onEndDateChange}
                             value={EndDate}
                         />
                     </div>
                 </div>
-                <br />
-                <br />
-
-
-                <label>링크</label>
-                <TextArea
-                    onChange={onLinkChange}
-                    value={Link}
-                />
-                <br />
-                <br />
-
-
-                <select style={{ width: '150px', height: '2rem', border: '1px solid rgba(0,0,0,0.3)', outline: '0', borderRadius: '5px', paddingLeft: '0.5rem' }} onChange={onCategoryChange}>
-                    {Artists.map((artist, index) => (
-                        <option key={index} value={artist._id}>{artist.name}</option>
-                    ))}
-                </select>
-                <br />
-                <br />
-
-                <Button type="primary" size="large" onClick={onSubmit}>
-                    Submit
-                </Button>
+                <div className="upload_prod_link">
+                    <text>링크</text>
+                    <TextArea
+                        onChange={onLinkChange}
+                        value={Link}
+                    />
+                </div>
+                <div className="upload_prod_select">
+                    <select onChange={onCategoryChange}>
+                        {Artists.map((artist, index) => (
+                            <option key={index} value={artist._id}>{artist.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <button className="upload_prod_button" onClick={onSubmit}>
+                    업로드
+                </button>
             </Form>
+            </div>
         </div>
     )
 }
