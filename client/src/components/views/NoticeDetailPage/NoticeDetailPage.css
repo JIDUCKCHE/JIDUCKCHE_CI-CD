@@ -21,7 +21,7 @@
 
 .notice_detail_background #title {
     width: 90%;
-    font-size: 4vw;
+    font-size: 2vw;
     font-weight: bold;
     color: white;
     margin-top: 1rem;
@@ -37,7 +37,7 @@
 .notice_detail_content text {
     white-space: pre-line;
     color: white;
-    font-size: 2vw;
+    font-size: 1vw;
     font-weight: 500;
 }
 
