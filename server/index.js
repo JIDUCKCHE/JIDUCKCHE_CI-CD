@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan("combined", { stream: logger.stream }));
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.resolve(__dirname, "../public")));
 app.use(express.static("client/build"));
 
 app.use("/api/user", require("./routes/user"));
