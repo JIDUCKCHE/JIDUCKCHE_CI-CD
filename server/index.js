@@ -19,8 +19,8 @@ mongoose
 	.catch((err) => console.log(err));
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("combined", { stream: logger.stream }));
 app.use(express.static(path.resolve(__dirname, "../public")));

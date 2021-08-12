@@ -5,7 +5,7 @@ const { responseHandler } = require("./common");
 
 const { auth } = require("../middleware/auth");
 
-// complete -> join 체크
+// complete -> join 체크 -> test 필요
 router.get("/info/:id", (req, res) => {
 	responseHandler(userLib.readUserInfo(req.params.id), res);
 });
@@ -15,6 +15,7 @@ router.get("/authCode/:id", (req, res) => {
 	responseHandler(userLib.createAuthCode(req.params.id), res);
 });
 
+// complete -> test 필요
 router.get("/auth", auth, (req, res) => {
 	res.status(200).json({
 		_id: req.user._id,
@@ -29,6 +30,7 @@ router.get("/auth", auth, (req, res) => {
 	});
 });
 
+// complete -> test 필요
 router.get("/dup", (req, res) => {
 	responseHandler(
 		userLib.checkDuplication(req.query.id, req.query.email),
@@ -46,10 +48,12 @@ router.put("/emailAuth/:id", (req, res) => {
 	responseHandler(userLib.emailAuth(req.params.id, req.body.authCode), res);
 });
 
+// complete -> test 필요
 router.put("/admin/:id", (req, res) => {
 	responseHandler(userLib.setAdmin(req.params.id), res);
 });
 
+// complete -> test 필요
 router.post("/login", (req, res) => {
 	userLib
 		.doLogin(req)
@@ -67,6 +71,7 @@ router.post("/login", (req, res) => {
 		});
 });
 
+// 제거 예정 -> 클라이언트에서 토큰 삭제로 구현
 router.get("/logout", auth, (req, res) => {
 	responseHandler(userLib.doLogout(req.user._id), res);
 });

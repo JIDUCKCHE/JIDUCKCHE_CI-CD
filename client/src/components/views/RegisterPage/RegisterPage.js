@@ -39,7 +39,7 @@ function RegisterPage(props) {
 
     const checkDup = (value, type) => {
         let params = {}
-        if (type == 'id') { params = { id: value } }
+        if (type == 'id') { params = { name: value } }
         if (type == 'email') { params = { email: value } }
 
         Axios.get(`api/user/dup`, { params: params })
